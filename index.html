@@ -1,0 +1,2373 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatwa Tarjih Muhammadiyah - Koleksi Lengkap</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .container {
+            display: flex;
+            height: calc(100vh - 100px);
+            max-width: 100%;
+        }
+        
+        .sidebar {
+            flex: 0 0 33.333%;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            height: 100%;
+            overflow-y: auto;
+            border-right: 1px solid #ddd;
+        }
+        
+        .content {
+            flex: 0 0 66.667%;
+            background: white;
+            height: 100%;
+            position: relative;
+        }
+        
+        .search-box {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 10;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .category {
+            border-bottom: 1px solid #eee;
+        }
+        
+        .category-header {
+            padding: 15px;
+            background: #f8f9fa;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+            user-select: none;
+        }
+        
+        .category-header:hover {
+            background: #e9ecef;
+        }
+        
+        .category-header .arrow {
+            transition: transform 0.3s;
+            font-size: 12px;
+        }
+        
+        .category-header.active .arrow {
+            transform: rotate(90deg);
+        }
+        
+        .category-items {
+            display: none;
+            background: white;
+        }
+        
+        .category-items.active {
+            display: block;
+        }
+        
+        .item {
+            padding: 12px 15px 12px 30px;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .item:hover {
+            background: #f8f9fa;
+            border-left-color: #667eea;
+        }
+        
+        .item.active {
+            background: #e7f3ff;
+            border-left-color: #667eea;
+            color: #667eea;
+            font-weight: 500;
+        }
+        
+        .welcome {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+            padding: 60px 40px;
+            color: #666;
+        }
+        
+        .welcome h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .welcome p {
+            line-height: 1.8;
+            max-width: 500px;
+            font-size: 16px;
+        }
+        
+        .welcome-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+        
+        .article-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: white;
+            overflow: hidden;
+        }
+        
+        .article-content {
+            height: 100%;
+            overflow-y: auto;
+            padding: 30px 40px 80px;
+            line-height: 1.75;
+        }
+        
+        .article-content img,
+        .article-content iframe {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .article-content blockquote {
+            border-left: 4px solid #667eea;
+            padding-left: 16px;
+            color: #555;
+            margin: 16px 0;
+        }
+        
+        .article-title {
+            margin-bottom: 20px;
+            color: #222;
+        }
+        
+        .article-meta {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .error-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #555;
+        }
+        
+        .error-state h3 {
+            margin-bottom: 10px;
+            color: #e74c3c;
+        }
+        
+        .retry-button {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        
+        .retry-button:hover {
+            background: #5568d3;
+        }
+        
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+        
+        .loading-overlay.hidden {
+            display: none;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .open-new-tab {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 13px;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background 0.3s;
+        }
+        
+        .open-new-tab:hover {
+            background: #5568d3;
+        }
+        
+        @media (max-width: 968px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                flex: 0 0 40%;
+                border-right: none;
+                border-bottom: 1px solid #ddd;
+            }
+            
+            .content {
+                flex: 0 0 60%;
+            }
+        }
+        
+        .stats {
+            padding: 10px 15px;
+            background: #f0f7ff;
+            border-bottom: 1px solid #d0e7ff;
+            font-size: 13px;
+            color: #555;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🕌 Fatwa Tarjih Muhammadiyah</h1>
+        <p>Koleksi Lengkap Tanya Jawab Agama</p>
+    </div>
+    
+    <div class="container">
+        <div class="sidebar">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 Cari judul artikel...">
+            </div>
+            <div class="stats" id="stats">Total: <strong>0</strong> artikel</div>
+            <div id="categories"></div>
+        </div>
+        
+        <div class="content">
+            <div class="welcome" id="welcomeScreen">
+                <div class="welcome-icon">📚</div>
+                <h2>Selamat Datang</h2>
+                <p>Pilih salah satu artikel dari daftar di samping untuk membaca konten lengkapnya. Gunakan kotak pencarian untuk menemukan topik yang Anda cari.</p>
+            </div>
+            <div class="article-container" id="articleContainer" style="display: none;">
+                <button class="open-new-tab" id="openNewTab">🔗 Buka di Tab Baru</button>
+                <div class="loading-overlay" id="loadingOverlay">
+                    <div class="spinner"></div>
+                    <p>Memuat artikel...</p>
+                </div>
+                <div class="article-content" id="articleContent">
+                    <p>Pilih artikel dari daftar untuk mulai membaca.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+window.articlesData = {
+  "Akhlak": [
+    {
+      "title": "Kriteria Busana Muslimah yang Islami",
+      "url": "https://fatwatarjih.or.id/kriteria-busana-muslimah-yang-islami/"
+    },
+    {
+      "title": "Menyikapi Undangan Tahlilan, Bagaimana Sebaiknya?",
+      "url": "https://fatwatarjih.or.id/menyikapi-undangan-tahlilan/"
+    },
+    {
+      "title": "Hukum Membeli Buku atau Kaset Bajakan",
+      "url": "https://fatwatarjih.or.id/hukum-membeli-buku-atau-kaset-bajakan/"
+    },
+    {
+      "title": "Penjelasan Seputar Khulu’",
+      "url": "https://fatwatarjih.or.id/penjelasan-seputar-khulu/"
+    },
+    {
+      "title": "Hutang dan Sumbangan, Mana yang Harus Didahulukan?",
+      "url": "https://fatwatarjih.or.id/mendahulukan-hutang-atau-sumbangan/"
+    },
+    {
+      "title": "Hukum Bunuh Diri Menurut Islam",
+      "url": "https://fatwatarjih.or.id/hukum-bunuh-diri-menurut-islam/"
+    },
+    {
+      "title": "Perayaan Acara Milad di Masjid, Bolehkah?",
+      "url": "https://fatwatarjih.or.id/perayaan-acara-milad-di-masjid-bolehkah/"
+    },
+    {
+      "title": "Pohon yang Menjulur ke Pekarangan Tetangga",
+      "url": "https://fatwatarjih.or.id/pohon-menjulur-ke-pekarangan-tetangga/"
+    },
+    {
+      "title": "Membakar Mushaf Al-Qur’an yang Sudah Rapuh, Bolehkah?",
+      "url": "https://fatwatarjih.or.id/membakar-mushaf-al-quran-rapuh/"
+    },
+    {
+      "title": "Tujuan, Petunjuk dan Asas Dalam Melaksanakan Agama",
+      "url": "https://fatwatarjih.or.id/tujuan-petunjuk-dan-asas-dalam-melaksanakan-agama/"
+    },
+    {
+      "title": "Kasus Hibah Tanah dari Orangtua ke Anak",
+      "url": "https://fatwatarjih.or.id/kasus-hibah-tanah-dari-orangtua-ke-anak/"
+    },
+    {
+      "title": "Hukum Suap (Risywah) pada Saat Pemilu",
+      "url": "https://fatwatarjih.or.id/hukum-suap-risywah-pada-saat-pemilu/"
+    },
+    {
+      "title": "Hukum Buang Air Menghadap Kiblat",
+      "url": "https://fatwatarjih.or.id/hukum-buang-air-menghadap-kiblat/"
+    },
+    {
+      "title": "Hukum Alkohol pada Parfum, Antiseptic, Sanitizer dan Sejenisnya",
+      "url": "https://fatwatarjih.or.id/hukum-alkohol-pada-parfum-antiseptic-sanitizer-dan-sejenisnya/"
+    },
+    {
+      "title": "Apakah Alkohol itu Najis?",
+      "url": "https://fatwatarjih.or.id/apakah-alkohol-itu-najis/"
+    },
+    {
+      "title": "Asal Muasal Hukum Syara’ Wajib, Sunnah dan Lainnya",
+      "url": "https://fatwatarjih.or.id/asal-muasal-hukum-syara-wajib-sunnah-dan-lainnya/"
+    },
+    {
+      "title": "Penjelasan Seputar Sumpah dan Kaffaratnya",
+      "url": "https://fatwatarjih.or.id/penjelasan-seputar-sumpah-dan-kaffaratnya/"
+    },
+    {
+      "title": "Menyewakan Menara Masjid untuk Provider Seluler",
+      "url": "https://fatwatarjih.or.id/menyewakan-menara-masjid-untuk-provider-seluler/"
+    },
+    {
+      "title": "Hukum Muslimah Berjilbab Transparan dan Mengenakan Celana",
+      "url": "https://fatwatarjih.or.id/hukum-muslimah-berjilbab-transparan-dan-mengenakan-celana/"
+    },
+    {
+      "title": "Hukum dan Tuntunan Ziarah Kubur",
+      "url": "https://fatwatarjih.or.id/hukum-dan-tuntunan-ziarah-kubur/"
+    },
+    {
+      "title": "Hukum Memelihara Anjing dan Soal Malaikat yang Tidak Masuk Rumah",
+      "url": "https://fatwatarjih.or.id/hukum-memelihara-anjing-dan-soal-malaikat-yang-tidak-masuk-rumah/"
+    },
+    {
+      "title": "Penjelasan Tentang Nadzar dan Sumpah",
+      "url": "https://fatwatarjih.or.id/penjelasan-tentang-nadzar-dan-sumpah/"
+    },
+    {
+      "title": "Hukum Game Online",
+      "url": "https://fatwatarjih.or.id/hukum-game-online/"
+    },
+    {
+      "title": "Siapa Saja yang Termasuk Mahram?",
+      "url": "https://fatwatarjih.or.id/siapa-saja-yang-termasuk-mahram/"
+    },
+    {
+      "title": "Istri Aktif di Organisasi, Bagaimana Hukumnya?",
+      "url": "https://fatwatarjih.or.id/istri-aktif-di-organisasi-bagaimana-hukumnya/"
+    },
+    {
+      "title": "Panggilan Papa Mama untuk Suami Istri",
+      "url": "https://fatwatarjih.or.id/panggilan-papa-mama-untuk-suami-istri/"
+    },
+    {
+      "title": "Pengertian dan Hukum Taklid",
+      "url": "https://fatwatarjih.or.id/pengertian-dan-hukum-taklid/"
+    },
+    {
+      "title": "Walimatul ‘Ursy dengan Hewan Qurban",
+      "url": "https://fatwatarjih.or.id/walimatul-ursy-dengan-hewan-qurban/"
+    },
+    {
+      "title": "Nama “Muhammadiyah” Kaitannya dengan Panggilan Nabi",
+      "url": "https://fatwatarjih.or.id/nama-muhammadiyah-kaitannya-dengan-panggilan-nabi/"
+    },
+    {
+      "title": "Hukum Melanggar Perjanjian Beasiswa Ikatan Dinas",
+      "url": "https://fatwatarjih.or.id/hukum-melanggar-perjanjian-beasiswa-ikatan-dinas/"
+    },
+    {
+      "title": "Menceraikan Istri Karena Tidak Bisa Memberikan Keturunan",
+      "url": "https://fatwatarjih.or.id/menceraikan-istri-karena-tidak-bisa-memberikan-keturunan/"
+    },
+    {
+      "title": "Kedudukan Wanita Dalam Pandangan Islam",
+      "url": "https://fatwatarjih.or.id/kedudukan-wanita-dalam-pandangan-islam/"
+    },
+    {
+      "title": "Hukum Pacaran Dalam Islam",
+      "url": "https://fatwatarjih.or.id/hukum-pacaran-dalam-islam/"
+    },
+    {
+      "title": "Penjelasan Seputar Jilbab dan Aurat Wanita Muslimah",
+      "url": "https://fatwatarjih.or.id/penjelasan-seputar-jilbab-dan-aurat-wanita-muslimah/"
+    },
+    {
+      "title": "Bolehkah Mengagumi dan Mengikuti Kyai Kharismatik?",
+      "url": "https://fatwatarjih.or.id/bolehkah-mengagumi-dan-mengikuti-kyai-kharismatik/"
+    },
+    {
+      "title": "Talak Dijatuhkan dalam Keadaan Emosi, Bagaimana Hukumnya?",
+      "url": "https://fatwatarjih.or.id/talak-dijatuhkan-dalam-keadaan-emosi-bagaimana-hukumnya/"
+    },
+    {
+      "title": "Hukum Wanita Muslimah Tidak Berhijab",
+      "url": "https://fatwatarjih.or.id/hukum-wanita-muslimah-tidak-berhijab/"
+    },
+    {
+      "title": "Riya atau Pamer, Seperti Apa Definisi dan Batasannya?",
+      "url": "https://fatwatarjih.or.id/riya-atau-pamer-seperti-apa-definisi-dan-batasannya/"
+    },
+    {
+      "title": "Tepatkah Penggunaan Sebutan Almarhum dan Almarhumah?",
+      "url": "https://fatwatarjih.or.id/tepatkah-penggunaan-sebutan-almarhum-dan-almarhumah/"
+    },
+    {
+      "title": "Cara Menyembelih Ayam yang Benar Menurut Islam",
+      "url": "https://fatwatarjih.or.id/cara-menyembelih-ayam-yang-benar-menurut-islam/"
+    },
+    {
+      "title": "Hukum Membelanjakan Harta untuk Gadis Bukan Mahramnya",
+      "url": "https://fatwatarjih.or.id/hukum-membelanjakan-harta-untuk-gadis-bukan-mahramnya/"
+    },
+    {
+      "title": "Hukum Melakukan Onani",
+      "url": "https://fatwatarjih.or.id/hukum-melakukan-onani/"
+    },
+    {
+      "title": "Perselingkuhan, Bagaimana Hukumnya?",
+      "url": "https://fatwatarjih.or.id/perselingkuhan-bagaimana-hukumnya/"
+    },
+    {
+      "title": "Karamah Seorang Kyai",
+      "url": "https://fatwatarjih.or.id/karamah-seorang-kyai/"
+    },
+    {
+      "title": "Sikap Muhammadiyah Mengenai Ahmadiyah dan RUU Pornografi",
+      "url": "https://fatwatarjih.or.id/sikap-muhammadiyah-mengenai-ahmadiyah-dan-ruu-pornografi/"
+    },
+    {
+      "title": "Hukum Menyuap untuk Menjadi PNS",
+      "url": "https://fatwatarjih.or.id/hukum-menyuap-untuk-menjadi-pns/"
+    },
+    {
+      "title": "Aurat Wanita Muslimah",
+      "url": "https://fatwatarjih.or.id/aurat-wanita-muslimah/"
+    },
+    {
+      "title": "Hukum Mewajibkan Berinfak dengan Jumlah Tertentu",
+      "url": "https://fatwatarjih.or.id/mewajibkan-berinfak-dengan-jumlah-tertentu/"
+    },
+    {
+      "title": "Pornografi Dalam Tinjauan Islam",
+      "url": "https://fatwatarjih.or.id/pornografi-dalam-tinjauan-islam/"
+    },
+    {
+      "title": "Musibah dan Bencana, Pertanda Allah Murka?",
+      "url": "https://fatwatarjih.or.id/musibah-dan-bencana-pertanda-allah-murka/"
+    },
+    {
+      "title": "Sengketa Pembagian Harta Warisan",
+      "url": "https://fatwatarjih.or.id/sengketa-pembagian-harta-warisan/"
+    },
+    {
+      "title": "Membangunkan Orang Menjelang Subuh",
+      "url": "https://fatwatarjih.or.id/membangunkan-orang-menjelang-subuh/"
+    },
+    {
+      "title": "Hukum Takbir Keliling",
+      "url": "https://fatwatarjih.or.id/hukum-takbir-keliling/"
+    },
+    {
+      "title": "Memberi Para Peminta Diambilkan dari Zakat Perdagangan",
+      "url": "https://fatwatarjih.or.id/memberi-para-peminta-pengemis-sumbangan-dari-zakat-perdagangan/"
+    },
+    {
+      "title": "Larangan Menjulurkan Kaki ke Arah Kiblat Saat Tidur",
+      "url": "https://fatwatarjih.or.id/larangan-menjulurkan-kaki-ke-arah-kiblat-saat-tidur/"
+    },
+    {
+      "title": "Memasang Lambang Muhammadiyah di Masjid",
+      "url": "https://fatwatarjih.or.id/memasang-lambang-muhammadiyah-di-masjid/"
+    },
+    {
+      "title": "Kedudukan Hadis Mengenai Undangan Menghadiri Khitanan",
+      "url": "https://fatwatarjih.or.id/hadis-tentang-undangan-menghadiri-khitanan/"
+    }
+  ],
+  "Akidah": [
+    {
+      "title": "Hukum Mengucapkan Selamat Natal Bagi Muslim",
+      "url": "https://fatwatarjih.or.id/hukum-mengucapkan-selamat-natal/"
+    },
+    {
+      "title": "Hukum Merayakan HUT Republik Indonesia",
+      "url": "https://fatwatarjih.or.id/hukum-merayakan-hut-republik-indonesia/"
+    },
+    {
+      "title": "Hukum Baiat Pada Kelompok Tertentu",
+      "url": "https://fatwatarjih.or.id/hukum-baiat-pada-kelompok-tertentu/"
+    },
+    {
+      "title": "Acara Tujuh Bulanan Ibu Hamil dan Membacakan Talqin Saat Pemakaman",
+      "url": "https://fatwatarjih.or.id/mitoni-tujuh-bulanan-ibu-hamil-dan-talqin-mayit/"
+    },
+    {
+      "title": "Hukum Makanan Dari Acara Hari Kematian",
+      "url": "https://fatwatarjih.or.id/hukum-makanan-dari-acara-hari-kematian/"
+    },
+    {
+      "title": "Urut-Urutan Dalam Rukun Islam",
+      "url": "https://fatwatarjih.or.id/urut-urutan-dalam-rukun-islam/"
+    },
+    {
+      "title": "Kegiatan Suluk Tarekat Naqsabandiyah",
+      "url": "https://fatwatarjih.or.id/kegiatan-suluk-tarekat-naqsabandiyah/"
+    },
+    {
+      "title": "Memakai Jimat, Bagaimana Hukumnya?",
+      "url": "https://fatwatarjih.or.id/hukum-jimat-dalam-islam/"
+    },
+    {
+      "title": "Perbedaan Antara Tuhan dan Makhluk",
+      "url": "https://fatwatarjih.or.id/perbedaan-antara-tuhan-dan-makhluk/"
+    },
+    {
+      "title": "Nikah Beda Agama, Bagaimana Hukumnya?",
+      "url": "https://fatwatarjih.or.id/nikah-beda-agama-bagaimana-hukumnya/"
+    },
+    {
+      "title": "Pandangan Muhammadiyah Tentang LDII",
+      "url": "https://fatwatarjih.or.id/pandangan-muhammadiyah-tentang-ldii/"
+    },
+    {
+      "title": "Bagaimana Hukum Sihir?",
+      "url": "https://fatwatarjih.or.id/bagaimana-hukum-sihir/"
+    },
+    {
+      "title": "Apa Itu Syirkul Asbab?",
+      "url": "https://fatwatarjih.or.id/apa-itu-syirkul-asbab/"
+    },
+    {
+      "title": "Mengapa Muhammadiyah Tidak Bermadzhab?",
+      "url": "https://fatwatarjih.or.id/mengapa-muhammadiyah-tidak-bermadzhab/"
+    },
+    {
+      "title": "Penjelasan Seputar Fardhu Kifayah",
+      "url": "https://fatwatarjih.or.id/penjelasan-seputar-fardhu-kifayah/"
+    },
+    {
+      "title": "Hukum Selamatan untuk Orang yang Meninggal Dunia",
+      "url": "https://fatwatarjih.or.id/hukum-selamatan-untuk-orang-yang-meninggal-dunia/"
+    },
+    {
+      "title": "Hukum Nikah Beda Agama",
+      "url": "https://fatwatarjih.or.id/hukum-nikah-beda-agama/"
+    },
+    {
+      "title": "Isi Buku “Nur Muhammad dan Berita dari Alam Ghaib”",
+      "url": "https://fatwatarjih.or.id/isi-buku-nur-muhammad-dan-berita-dari-alam-ghaib/"
+    },
+    {
+      "title": "Maksud Al-Ka’inat dan Al-Ikhtiar dalam HPT Muhammadiyah",
+      "url": "https://fatwatarjih.or.id/maksud-al-kainat-dan-al-ikhtiar-dalam-hpt-muhammadiyah/"
+    },
+    {
+      "title": "Tahlilan dalam Pandangan Muhammadiyah",
+      "url": "https://fatwatarjih.or.id/tahlilan-dalam-pandangan-muhammadiyah/"
+    },
+    {
+      "title": "Masalah Shalawat dan Kitab Barzanji",
+      "url": "https://fatwatarjih.or.id/masalah-shalawat-dan-kitab-barzanji/"
+    },
+    {
+      "title": "Thriqat",
+      "url": "https://fatwatarjih.or.id/thriqat/"
+    },
+    {
+      "title": "Hukum Tato dan Rajah",
+      "url": "https://fatwatarjih.or.id/hukum-tato-dan-rajah/"
+    },
+    {
+      "title": "Masuk Dulu ke Neraka Baru ke Surga, Benarkah Demikian?",
+      "url": "https://fatwatarjih.or.id/masuk-dulu-ke-neraka-baru-ke-surga-benarkah-demikian/"
+    },
+    {
+      "title": "Penjelasan Terkait Malam Lailatul Qadar",
+      "url": "https://fatwatarjih.or.id/penjelasan-terkait-malam-lailatul-qadar/"
+    },
+    {
+      "title": "Bolehkah Membaca Tahlilan di Rumah Duka?",
+      "url": "https://fatwatarjih.or.id/bolehkah-membaca-tahlilan-di-rumah-duka/"
+    },
+    {
+      "title": "Apakah Allah Bersemayam di Atas ‘Arsy?",
+      "url": "https://fatwatarjih.or.id/apakah-allah-bersemayam-di-atas-arsy/"
+    },
+    {
+      "title": "Keistimewaan Meninggal di Hari Jumat, Adakah Dasarnya?",
+      "url": "https://fatwatarjih.or.id/keistimewaan-meninggal-di-hari-jumat/"
+    },
+    {
+      "title": "Pengejaran dan Pembunuhan Isa AS",
+      "url": "https://fatwatarjih.or.id/pengejaran-dan-pembunuhan-isa-as/"
+    },
+    {
+      "title": "Benarkah Ada Arwah Gentayangan?",
+      "url": "https://fatwatarjih.or.id/benarkah-ada-arwah-gentayangan/"
+    },
+    {
+      "title": "Hadis Tentang Ruh Berkeliling Rumah",
+      "url": "https://fatwatarjih.or.id/hadis-tentang-ruh-berkeliling-rumah/"
+    },
+    {
+      "title": "Suami Istri Berkumpul Kembali di Akhirat?",
+      "url": "https://fatwatarjih.or.id/suami-istri-berkumpul-kembali-di-akhirat/"
+    },
+    {
+      "title": "Membaca Shalawat dengan Bilangan Tertentu",
+      "url": "https://fatwatarjih.or.id/membaca-shalawat-dengan-bilangan-tertentu/"
+    },
+    {
+      "title": "Memakai Kalung Kesehatan untuk Obat",
+      "url": "https://fatwatarjih.or.id/memakai-kalung-kesehatan-untuk-obat/"
+    },
+    {
+      "title": "Hukum Mengadakan Peringatan Maulid Nabi Muhammad SAW",
+      "url": "https://fatwatarjih.or.id/hukum-mengadakan-peringatan-maulid-nabi/"
+    },
+    {
+      "title": "Mengamalkan Doa Nabi Isa AS",
+      "url": "https://fatwatarjih.or.id/mengamalkan-doa-nabi-isa-as/"
+    },
+    {
+      "title": "I’tiqad (Keyakinan) Muhammadiyah Tentang Hari Kiamat dan Imam Mahdi",
+      "url": "https://fatwatarjih.or.id/itiqad-keyakinan-muhammadiyah-tentang-hari-kiamat-dan-imam-mahdi/"
+    },
+    {
+      "title": "Membimbing Orang Masuk Islam",
+      "url": "https://fatwatarjih.or.id/membimbing-orang-masuk-islam/"
+    },
+    {
+      "title": "Hukum Makan Makan di Rumah Duka",
+      "url": "https://fatwatarjih.or.id/makan-makan-di-rumah-duka/"
+    },
+    {
+      "title": "Orang yang Bunuh Diri, Dishalatkan atau Tidak?",
+      "url": "https://fatwatarjih.or.id/orang-yang-bunuh-diri-dishalatkan-atau-tidak/"
+    },
+    {
+      "title": "Membaca Tahlil Dengan Bilangan Tertentu, Bersama-Sama Dengan Suara Keras Serta Menggeleng-Gelengkan Kepala",
+      "url": "https://fatwatarjih.or.id/membaca-tahlil-dengan-suara-keras-sambil-menggeleng-gelengkan-kepala/"
+    },
+    {
+      "title": "Memperingati Hari Kematian Seseorang, Adakah Dasar Hukumnya?",
+      "url": "https://fatwatarjih.or.id/memperingati-hari-kematian/"
+    }
+  ],
+  "Al-Qur'an dan Hadits": [
+    {
+      "title": "Kualitas Hadis Shalat Tarawih 8 Rakaat",
+      "url": "https://fatwatarjih.or.id/kualitas-hadis-shalat-tarawih-8-rakaat/"
+    },
+    {
+      "title": "Lafal Shadaqallahul ‘Azhim, Adakah Tuntunannya?",
+      "url": "https://fatwatarjih.or.id/lafal-shadaqallahul-azhim-adakah-tuntunannya/"
+    },
+    {
+      "title": "Maksud Hadis “di antara setiap dua adzan ada shalat”",
+      "url": "https://fatwatarjih.or.id/maksud-hadis-di-antara-setiap-dua-adzan-ada-shalat/"
+    },
+    {
+      "title": "Mengapa Dibaca “Min Qablu” dan “Min Ba’du”?",
+      "url": "https://fatwatarjih.or.id/mengapa-dibaca-min-qablu-dan-min-badu/"
+    },
+    {
+      "title": "Hadis Shalat Malam 4-4 Rakaat yang Ada di HPT",
+      "url": "https://fatwatarjih.or.id/hadis-shalat-malam-4-4-rakaat-yang-ada-di-hpt/"
+    },
+    {
+      "title": "Maksud Hadis “Kembali dari Jihad Kecil Menuju Jihad Besar”",
+      "url": "https://fatwatarjih.or.id/maksud-hadis-kembali-dari-jihad-kecil-menuju-jihad-besar/"
+    },
+    {
+      "title": "Hukum Menjelaskan Hadis dengan Ayat Al-Qur’an",
+      "url": "https://fatwatarjih.or.id/hukum-menjelaskan-hadis-dengan-ayat-al-quran/"
+    },
+    {
+      "title": "Upacara Khataman Al-Qur’an",
+      "url": "https://fatwatarjih.or.id/upacara-tradisi-khataman-al-quran/"
+    }
+  ],
+  "Aqiqah": [
+    {
+      "title": "Adakah Aqiqah Bagi Janin Pasca Keguguran?",
+      "url": "https://fatwatarjih.or.id/adakah-aqiqah-bagi-janin-pasca-keguguran/"
+    },
+    {
+      "title": "Memberi Nama Bayi Saat Aqiqah",
+      "url": "https://fatwatarjih.or.id/memberi-nama-bayi-saat-aqiqah/"
+    },
+    {
+      "title": "Sumbangan Kambing untuk Membayar Nazar Aqiqah Tidak Disembelih Tapi Dijual",
+      "url": "https://fatwatarjih.or.id/kambing-untuk-nazar-aqiqah-tidak-disembelih/"
+    }
+  ],
+  "Bank": [
+    {
+      "title": "Hukum Menyimpan Uang di Bank Konvensional",
+      "url": "https://fatwatarjih.or.id/hukum-menyimpan-uang-kas-di-bank/"
+    }
+  ],
+  "Covid-19": [
+    {
+      "title": "Hukum Shalat Jumat Bukan di Masjid Pada Masa Pandemi Covid-19",
+      "url": "https://fatwatarjih.or.id/hukum-shalat-jumat-tidak-di-masjid-2/"
+    },
+    {
+      "title": "Hukum Shalat Jumat Secara Sif Pada Masa Pandemi Covid-19",
+      "url": "https://fatwatarjih.or.id/hukum-shalat-jumat-secara-sif/"
+    },
+    {
+      "title": "Hukum Shalat Bermasker Pada Masa Pandemi Covid-19",
+      "url": "https://fatwatarjih.or.id/hukum-shalat-bermasker/"
+    },
+    {
+      "title": "Hukum Shalat dengan Shaf Berjarak Pada Masa Pandemi Covid-19",
+      "url": "https://fatwatarjih.or.id/hukum-shalat-dengan-shaf-berjarak/"
+    },
+    {
+      "title": "Hukum Shalat Idul Fitri di Rumah di Saat Wabah Covid-19",
+      "url": "https://fatwatarjih.or.id/hukum-shalat-idul-fitri-di-rumah-saat-covid-19/"
+    },
+    {
+      "title": "Shalat ‘Idain dan Dasar Hukum Pelaksanaannya",
+      "url": "https://fatwatarjih.or.id/shalat-idain-dan-dasar-hukum-pelaksanaannya/"
+    },
+    {
+      "title": "Memperbanyak Berdoa, Beristighfar dan Bertaubat Kepada Allah di Masa Darurat Covid-19",
+      "url": "https://fatwatarjih.or.id/berdoa-beristighfar-bertaubat-darurat-covid-19/"
+    },
+    {
+      "title": "Banyak Berbuat Baik dan Saling Tolong Menolong di Masa Darurat Covid-19",
+      "url": "https://fatwatarjih.or.id/berbuat-baik-dan-tolong-menolong-darurat-covid-19/"
+    },
+    {
+      "title": "Anjuran Memperbanyak Zakat, Infak dan Sedekah di Masa Darurat Covid-19",
+      "url": "https://fatwatarjih.or.id/memperbanyak-zakat-infak-sedekah-covid-19/"
+    },
+    {
+      "title": "Akad Nikah dan Resepsi Pada Saat Darurat Covid-19",
+      "url": "https://fatwatarjih.or.id/akad-nikah-dan-resepsi-pada-saat-darurat-covid-19/"
+    },
+    {
+      "title": "Tuntunan Merawat Jenazah Pasien Covid-19",
+      "url": "https://fatwatarjih.or.id/tuntunan-merawat-jenazah-pasien-covid-19/"
+    },
+    {
+      "title": "Shalat Jenazah dan Kegiatan Takziyah pada Pasien Covid-19",
+      "url": "https://fatwatarjih.or.id/shalat-jenazah-dan-kegiatan-takziyah-pada-pasien-covid-19/"
+    },
+    {
+      "title": "Perawatan Jenazah Pasien Covid-19",
+      "url": "https://fatwatarjih.or.id/perawatan-jenazah-pasien-covid-19/"
+    },
+    {
+      "title": "Ibadah di Bulan Ramadhan dan Syawal pada Masa Darurat Covid-19",
+      "url": "https://fatwatarjih.or.id/ramadhan-dan-syawal-pada-masa-darurat-covid-19/"
+    },
+    {
+      "title": "Shalat Jumat Pada Masa Darurat Covid-19",
+      "url": "https://fatwatarjih.or.id/shalat-jumat-pada-masa-darurat-covid-19/"
+    },
+    {
+      "title": "Rukhsah Shalat Bagi Tenaga Medis yang Melayani Pasien Covid-19",
+      "url": "https://fatwatarjih.or.id/rukhsah-shalat-tenaga-medis-covid-19/"
+    },
+    {
+      "title": "Kumandang Azan pada Masa Darurat Covid-19",
+      "url": "https://fatwatarjih.or.id/kumandang-azan-pada-masa-darurat-covid-19/"
+    },
+    {
+      "title": "Shalat Berjamaah di Masjid pada Masa Darurat Covid-19",
+      "url": "https://fatwatarjih.or.id/shalat-berjamaah-di-masjid-pada-masa-darurat-covid-19/"
+    },
+    {
+      "title": "Masa Darurat Covid-19, Ibadah Shalat Tetap Wajib Dilakukan",
+      "url": "https://fatwatarjih.or.id/masa-darurat-covid-19-ibadah-shalat-tetap-wajib-dilakukan/"
+    },
+    {
+      "title": "Social (Physical) Distancing dan Stay At Home di Tengah Mewabahnya Covid-19",
+      "url": "https://fatwatarjih.or.id/social-physical-distancing-dan-stay-at-home-di-tengah-mewabahnya-covid-19/"
+    },
+    {
+      "title": "Upaya Mencegah Penularan Covid-19 Termasuk Ibadah Bernilai Jihad",
+      "url": "https://fatwatarjih.or.id/upaya-mencegah-penularan-covid-19-termasuk-ibadah-bernilai-jihad/"
+    },
+    {
+      "title": "Peran Para Ahli dan Pemerintah dalam Mengupayakan Pengobatan Covid-19",
+      "url": "https://fatwatarjih.or.id/peran-para-ahli-dan-pemerintah-dalam-mengupayakan-pengobatan-covid-19/"
+    },
+    {
+      "title": "Pahala Syahid Bagi Orang yang Meninggal Karena Covid-19",
+      "url": "https://fatwatarjih.or.id/pahala-syahid-bagi-orang-yang-meninggal-karena-covid-19/"
+    },
+    {
+      "title": "Sikap Seorang Muslim Menghadapi Wabah Covid-19",
+      "url": "https://fatwatarjih.or.id/sikap-seorang-muslim-menghadapi-wabah-covid-19/"
+    }
+  ],
+  "Dzikir dan Doa": [
+    {
+      "title": "Bacaan Al Fatihah untuk Orang yang Meninggal Dunia",
+      "url": "https://fatwatarjih.or.id/bacaan-al-fatihah-untuk-orang-meninggal/"
+    },
+    {
+      "title": "Doa Sesudah Shalat Dhuha",
+      "url": "https://fatwatarjih.or.id/doa-sesudah-shalat-dhuha/"
+    },
+    {
+      "title": "Anjuran Berdoa Dengan Mengangkat Tangan",
+      "url": "https://fatwatarjih.or.id/anjuran-berdoa-dengan-mengangkat-tangan/"
+    },
+    {
+      "title": "Hukum Dzikir Bersama (Berjamaah)",
+      "url": "https://fatwatarjih.or.id/hukum-dzikir-bersama-berjamaah/"
+    },
+    {
+      "title": "Doa Iftitah “Allahumma baa‘id …” Dianggap Taklid",
+      "url": "https://fatwatarjih.or.id/doa-iftitah-allahumma-baaid-dianggap-taklid/"
+    },
+    {
+      "title": "Syarat Doa Maqbul, Apa Saja?",
+      "url": "https://fatwatarjih.or.id/syarat-doa-maqbul-apa-saja/"
+    },
+    {
+      "title": "Mengangkat Tangan Dalam Berdoa",
+      "url": "https://fatwatarjih.or.id/mengangkat-tangan-dalam-berdoa/"
+    },
+    {
+      "title": "Hukum Dzikir Berjamaah Dengan Bilangan dan Format Tertentu",
+      "url": "https://fatwatarjih.or.id/hukum-dzikir-berjamaah-dengan-bilangan-dan-format-tertentu/"
+    },
+    {
+      "title": "Hukum Dzikir Berjamaah Dipimpin Seorang Pemandu",
+      "url": "https://fatwatarjih.or.id/hukum-dzikir-berjamaah-dipimpin-seorang-pemandu/"
+    },
+    {
+      "title": "Adab dan Tata Cara Berdoa",
+      "url": "https://fatwatarjih.or.id/adab-dan-tata-cara-berdoa/"
+    }
+  ],
+  "Fikih Wanita": [
+    {
+      "title": "Bolehkah Wanita Haid Masuk Masjid untuk Ikut Pengajian?",
+      "url": "https://fatwatarjih.or.id/wanita-haid-masuk-masjid-untuk-pengajian/"
+    },
+    {
+      "title": "Shalat Bagi Wanita, Lebih Utama di Rumah atau di Masjid?",
+      "url": "https://fatwatarjih.or.id/shalat-bagi-wanita-lebih-utama-di-rumah-atau-di-masjid/"
+    },
+    {
+      "title": "Wali Nikah Perempuan yang Lahir di Luar Nikah",
+      "url": "https://fatwatarjih.or.id/wali-nikah-perempuan-yang-lahir-di-luar-nikah/"
+    },
+    {
+      "title": "Keputihan Pada Wanita dan Haid Wanita Ber-KB",
+      "url": "https://fatwatarjih.or.id/keputihan-pada-wanita-dan-haid-wanita-ber-kb/"
+    },
+    {
+      "title": "Masa Nifas Setelah Abortus (Keguguran)",
+      "url": "https://fatwatarjih.or.id/masa-nifas-setelah-abortus-keguguran/"
+    }
+  ],
+  "Haji dan Umrah": [
+    {
+      "title": "Badal Haji dan Umrah Serta Melakukan Umrah Berkali-kali",
+      "url": "https://fatwatarjih.or.id/badal-haji-dan-umrah-serta-melakukan-umrah-berkali-kali/"
+    },
+    {
+      "title": "ONH Dengan Cara Hutang Bank, Bagaimana Hukumnya?",
+      "url": "https://fatwatarjih.or.id/onh-dengan-cara-hutang-bank-bagaimana-hukumnya/"
+    },
+    {
+      "title": "Bantuan Dana untuk Ibadah Haji dari Orang Non Muslim",
+      "url": "https://fatwatarjih.or.id/bantuan-dana-untuk-ibadah-haji-dari-orang-non-muslim/"
+    },
+    {
+      "title": "Menggunakan Tabungan Haji untuk Keperluan Lain",
+      "url": "https://fatwatarjih.or.id/menggunakan-tabungan-haji-untuk-keperluan-lain/"
+    },
+    {
+      "title": "Berhaji Dengan Biaya APBD dan Berhaji Dibiayai Orang Lain Beda Agama",
+      "url": "https://fatwatarjih.or.id/berhaji-biaya-apbd-dan-dibiayai-orang-lain-beda-agama/"
+    },
+    {
+      "title": "Dam (Denda) Bagi Orang yang Melepas Pakaian Ihram",
+      "url": "https://fatwatarjih.or.id/dam-denda-bagi-orang-yang-melepas-pakaian-ihram/"
+    },
+    {
+      "title": "Kapan Waktu Membayar Dam?",
+      "url": "https://fatwatarjih.or.id/kapan-waktu-membayar-dam/"
+    },
+    {
+      "title": "Hukum Puasa Arafah Tidak Bertepatan Hari Wukuf Jamaah Haji",
+      "url": "https://fatwatarjih.or.id/hukum-puasa-arafah-tidak-bertepatan-hari-wukuf-jamaah-haji/"
+    },
+    {
+      "title": "Hukum Badal Haji",
+      "url": "https://fatwatarjih.or.id/hukum-badal-haji/"
+    },
+    {
+      "title": "Ketentuan Hari Raya yang Jatuh pada Hari Jumat dan Maksud Haji Akbar",
+      "url": "https://fatwatarjih.or.id/hari-raya-jatuh-pada-hari-jumat-dan-haji-akbar/"
+    }
+  ],
+  "Halal Haram": [
+    {
+      "title": "Hukum Konsumsi Laron, Belalang dan Gangsir",
+      "url": "https://fatwatarjih.or.id/hukum-konsumsi-laron-belalang-dan-gangsir/"
+    },
+    {
+      "title": "Hukum Penggunaan Kertas dari Kotoran Gajah dan Hukum Jual Beli Kotoran",
+      "url": "https://fatwatarjih.or.id/hukum-kertas-kotoran-gajah-jual-beli-kotoran/"
+    },
+    {
+      "title": "Hukum Ekstrak Kalajengking dan Ekstrak Lintah Dalam Obat Medis",
+      "url": "https://fatwatarjih.or.id/hukum-ekstrak-kalajengking-dan-ekstrak-lintah-dalam-obat-medis/"
+    },
+    {
+      "title": "Hukum Mengonsumsi Kopi Luwak dan Binatang Luwak",
+      "url": "https://fatwatarjih.or.id/hukum-mengonsumsi-kopi-luwak-dan-binatang-luwak/"
+    },
+    {
+      "title": "Memakan Daging Hewan Sembelihan di Luar Negeri",
+      "url": "https://fatwatarjih.or.id/memakan-daging-hewan-sembelihan-di-luar-negeri/"
+    },
+    {
+      "title": "Hukum Memakan Hasil Sembelihan Orang Non Muslim",
+      "url": "https://fatwatarjih.or.id/hukum-memakan-hasil-sembelihan-orang-non-muslim/"
+    },
+    {
+      "title": "Memakan Daging yang Tidak Diketahui Disembelih Dengan Membaca Basmalah atau Tidak",
+      "url": "https://fatwatarjih.or.id/memakan-daging-yang-tidak-disembelih-dengan-membaca-basmalah/"
+    },
+    {
+      "title": "Halal Haram Air Tape",
+      "url": "https://fatwatarjih.or.id/halal-haram-air-tape/"
+    },
+    {
+      "title": "Air Tape, Miras atau Bukan?",
+      "url": "https://fatwatarjih.or.id/air-tape-miras-atau-bukan/"
+    },
+    {
+      "title": "Mengonsumsi Telur dari Ayam Mati, Halal atau Haram?",
+      "url": "https://fatwatarjih.or.id/mengonsumsi-telur-dari-ayam-mati-halal-atau-haram/"
+    },
+    {
+      "title": "Hukum Memakan Binatang Bertaring",
+      "url": "https://fatwatarjih.or.id/hukum-memakan-binatang-bertaring/"
+    }
+  ],
+  "Hari Raya": [
+    {
+      "title": "Tuntunan Pelaksanaan Ibadah Kurban di Masa Pandemi Covid-19",
+      "url": "https://fatwatarjih.or.id/tuntunan-ibadah-kurban-di-masa-pandemi-covid-19/"
+    },
+    {
+      "title": "Shalat Idul Adha Bertepatan Dengan Hari Jumat",
+      "url": "https://fatwatarjih.or.id/shalat-idul-adha-bertepatan-hari-jumat/"
+    },
+    {
+      "title": "Tuntunan Menyambut dan Melaksanakan Shalat Idul Adha di Masa Pandemi Covid-19",
+      "url": "https://fatwatarjih.or.id/tuntunan-shalat-idul-adha-di-masa-pandemi-covid-19/"
+    },
+    {
+      "title": "Menggabungkan Penyembelihan Akikah dan Kurban",
+      "url": "https://fatwatarjih.or.id/menggabungkan-penyembelihan-akikah-dan-kurban/"
+    },
+    {
+      "title": "Bolehkah Berkurban Dengan Uang Utang?",
+      "url": "https://fatwatarjih.or.id/bolehkah-berkurban-dengan-uang-utang/"
+    },
+    {
+      "title": "Perintah Berkurban Dalam Al-Qur’an",
+      "url": "https://fatwatarjih.or.id/perintah-berkurban-dalam-al-quran/"
+    },
+    {
+      "title": "Adakah Doa Iftitah Dalam Shalat Id?",
+      "url": "https://fatwatarjih.or.id/adakah-doa-iftitah-dalam-shalat-id/"
+    },
+    {
+      "title": "Persoalan Seputar Takbir Hari Raya",
+      "url": "https://fatwatarjih.or.id/persoalan-seputar-takbir-hari-raya/"
+    },
+    {
+      "title": "Kapankah Waktu Dimulainya Takbir Hari Raya Idul Adha?",
+      "url": "https://fatwatarjih.or.id/waktu-mulai-takbir-hari-raya-idul-adha/"
+    },
+    {
+      "title": "Ketentuan Takbir Zawaid Dalam Shalat ‘Idain",
+      "url": "https://fatwatarjih.or.id/ketentuan-takbir-zawaid-dalam-shalat-idain/"
+    },
+    {
+      "title": "Ketentuan Shalat Id (Bilangan Takbir, Bacaan di Sela Takbir dan Khutbah)",
+      "url": "https://fatwatarjih.or.id/ketentuan-shalat-id-bilangan-takbir-bacaan-khutbah/"
+    },
+    {
+      "title": "Bacaan Takbir Idul Fitri dan Idul Adha Sesuai Tuntunan",
+      "url": "https://fatwatarjih.or.id/bacaan-takbir-idul-fitri-dan-idul-adha-sesuai-tuntunan/"
+    },
+    {
+      "title": "Takbir Zawaid Idain dan Khutbah Khusus untuk Jamaah Perempuan",
+      "url": "https://fatwatarjih.or.id/takbir-zawaid-idain-dan-khutbah-khusus-untuk-jamaah-perempuan/"
+    },
+    {
+      "title": "Hukum Mengadakan Lomba Takbiran",
+      "url": "https://fatwatarjih.or.id/hukum-mengadakan-lomba-takbiran/"
+    },
+    {
+      "title": "Kapan Waktu Dimulainya Takbir Hari Raya Idul Adha?",
+      "url": "https://fatwatarjih.or.id/waktu-dimulainya-takbir-hari-raya-idul-adha/"
+    },
+    {
+      "title": "Hitungan Takbir Shalat Id dan Doa di antara Takbir Zawaid",
+      "url": "https://fatwatarjih.or.id/hitungan-takbir-shalat-id-dan-doa-di-antara-takbir-zawaid/"
+    },
+    {
+      "title": "Pidato Sambutan Sebelum Shalat Id",
+      "url": "https://fatwatarjih.or.id/pidato-sambutan-sebelum-shalat-id/"
+    },
+    {
+      "title": "Khutbah Shalat Id, Sekali atau Dua Kali?",
+      "url": "https://fatwatarjih.or.id/khutbah-shalat-id-sekali-atau-dua-kali/"
+    },
+    {
+      "title": "Seruan untuk Memulai Shalat Id",
+      "url": "https://fatwatarjih.or.id/seruan-untuk-memulai-shalat-id/"
+    },
+    {
+      "title": "Konsep Miskin Seperti Apa yang Berhak Menerima Zakat?",
+      "url": "https://fatwatarjih.or.id/konsep-miskin-dalam-islam/"
+    }
+  ],
+  "Hukum Waris": [
+    {
+      "title": "Warisan dari Orangtua Non Muslim, Bagaimana Statusnya?",
+      "url": "https://fatwatarjih.or.id/warisan-dari-orangtua-non-muslim/"
+    },
+    {
+      "title": "Apakah Anak Angkat Berhak Mendapatkan Warisan?",
+      "url": "https://fatwatarjih.or.id/apakah-anak-angkat-berhak-mendapatkan-warisan/"
+    },
+    {
+      "title": "Ahli Waris dan Pembagiannya",
+      "url": "https://fatwatarjih.or.id/ahli-waris-dan-pembagiannya/"
+    },
+    {
+      "title": "Harta Gono-Gini dan Pembagian Warisan",
+      "url": "https://fatwatarjih.or.id/harta-gono-gini-dan-pembagian-warisan/"
+    },
+    {
+      "title": "Shadaqah Jariyah untuk Pewaris dari Harta Peninggalan yang Belum Dibagi",
+      "url": "https://fatwatarjih.or.id/sedekah-dari-harta-warisan-yang-belum-dibagi/"
+    },
+    {
+      "title": "Ketentuan Ahli Waris Pengganti",
+      "url": "https://fatwatarjih.or.id/ketentuan-ahli-waris-pengganti/"
+    }
+  ],
+  "Ibadah": [
+    {
+      "title": "Orang yang Berkurban Dilarang Memakan Dagingnya, Benarkah?",
+      "url": "https://fatwatarjih.or.id/orang-berkurban-dilarang-memakan-dagingnya/"
+    },
+    {
+      "title": "Adakah Nisab Berkurban?",
+      "url": "https://fatwatarjih.or.id/adakah-nisab-berkurban/"
+    },
+    {
+      "title": "Hukum Menyembelih Qurban Untuk Isteri Yang Telah Meninggal",
+      "url": "https://fatwatarjih.or.id/berkurban-untuk-almarhum-istri/"
+    },
+    {
+      "title": "Berkurban dengan Cara Arisan, Bolehkah?",
+      "url": "https://fatwatarjih.or.id/hukum-arisan-kurban/"
+    },
+    {
+      "title": "Menjual Kulit Hewan Kurban untuk Makan Bersama, Bolehkah?",
+      "url": "https://fatwatarjih.or.id/hukum-menjual-kulit-kurban-untuk-makan-bersama/"
+    },
+    {
+      "title": "Daging Kurban untuk Siapa?",
+      "url": "https://fatwatarjih.or.id/daging-kurban-untuk-siapa/"
+    },
+    {
+      "title": "Bolehkah Penyembelihan Kurban di Luar Tasyriq?",
+      "url": "https://fatwatarjih.or.id/menyembelih-kurban-setelah-hari-tasyriq/"
+    },
+    {
+      "title": "Bolehkah Kurban Tidak Disembelih Sendiri?",
+      "url": "https://fatwatarjih.or.id/kurban-tidak-disembelih-sendiri/"
+    },
+    {
+      "title": "Hukum Berangkat Haji Bukan Dengan Biaya Sendiri",
+      "url": "https://fatwatarjih.or.id/hukum-berangkat-haji-bukan-dengan-biaya-sendiri/"
+    },
+    {
+      "title": "Adakah Umrah Sunnah?",
+      "url": "https://fatwatarjih.or.id/adakah-umrah-sunnah/"
+    },
+    {
+      "title": "Waktu Melempar Jumrah",
+      "url": "https://fatwatarjih.or.id/waktu-melempar-jumrah/"
+    },
+    {
+      "title": "Mencium Hajar Aswad, Pakaian Haji dan Hukum Kentut Saat Wukuf",
+      "url": "https://fatwatarjih.or.id/mencium-hajar-aswad-pakaian-haji-kentut-saat-wukuf/"
+    },
+    {
+      "title": "Mengerjakan Haji Lagi atau Menghajikan Orang Miskin?",
+      "url": "https://fatwatarjih.or.id/haji-lagi-atau-menghajikan-orang-miskin/"
+    },
+    {
+      "title": "Hukum Berhaji Dari Hasil Buntut dan Arisan",
+      "url": "https://fatwatarjih.or.id/hukum-berhaji-dari-hasil-arisan/"
+    },
+    {
+      "title": "Berhaji Dengan Uang Pinjaman, Bolehkah?",
+      "url": "https://fatwatarjih.or.id/berhaji-dengan-uang-pinjaman/"
+    },
+    {
+      "title": "Anak Belum Baligh Berhaji, Bagaimana Hukumnya?",
+      "url": "https://fatwatarjih.or.id/hukum-haji-belum-baligh/"
+    },
+    {
+      "title": "Makna Haji Mabrur",
+      "url": "https://fatwatarjih.or.id/makna-haji-mabrur/"
+    },
+    {
+      "title": "Pemberian Makan Kepada Orang Miskin",
+      "url": "https://fatwatarjih.or.id/pemberian-makan-kepada-orang-miskin/"
+    },
+    {
+      "title": "Zakat Fitrah Anak Yatim, Piatu dan Anak Miskin di Panti Asuhan",
+      "url": "https://fatwatarjih.or.id/zakat-fitrah-anak-panti-asuhan/"
+    },
+    {
+      "title": "Zakat Fitrah untuk Sebagian Anggota Keluarga",
+      "url": "https://fatwatarjih.or.id/zakat-fitrah-untuk-sebagian-anggota-keluarga/"
+    },
+    {
+      "title": "Dua Bentuk Pelaksanaan Zakat Fitrah",
+      "url": "https://fatwatarjih.or.id/dua-bentuk-pelaksanaan-zakat-fitrah/"
+    },
+    {
+      "title": "Hukum Zakat Fitrah Setelah Shalat Id",
+      "url": "https://fatwatarjih.or.id/hukum-zakat-fitrah-setelah-shalat-id/"
+    },
+    {
+      "title": "Dana Zakat untuk Memberangkatkan Haji",
+      "url": "https://fatwatarjih.or.id/dana-zakat-untuk-memberangkatkan-haji/"
+    },
+    {
+      "title": "Zakat Transaksi dan Harta Warisan",
+      "url": "https://fatwatarjih.or.id/zakat-transaksi-dan-harta-warisan/"
+    },
+    {
+      "title": "Harta Simpanan, Haruskan Dikeluarkan Zakatnya?",
+      "url": "https://fatwatarjih.or.id/zakat-harta-simpanan/"
+    },
+    {
+      "title": "Zakat Tanaman dan Ikan",
+      "url": "https://fatwatarjih.or.id/zakat-tanaman-dan-ikan/"
+    },
+    {
+      "title": "Zakat Tunjangan Veteran",
+      "url": "https://fatwatarjih.or.id/zakat-tunjangan-veteran/"
+    },
+    {
+      "title": "Wajib Zakatkah Penghasilan Rp. 150.000/bulan?",
+      "url": "https://fatwatarjih.or.id/wajib-zakatkah-penghasilan-bulanan/"
+    },
+    {
+      "title": "Zakat Hasil Sawah yang Disewakan",
+      "url": "https://fatwatarjih.or.id/zakat-hasil-sawah-yang-disewakan/"
+    },
+    {
+      "title": "Zakat Harta yang Dihutang dan Pinjaman",
+      "url": "https://fatwatarjih.or.id/zakat-harta-yang-dihutang-dan-pinjaman/"
+    },
+    {
+      "title": "Bagaimana Perhitungan Zakat Gaji?",
+      "url": "https://fatwatarjih.or.id/perhitungan-zakat-gaji/"
+    },
+    {
+      "title": "Ketentuan Zakat Ternak Sapi",
+      "url": "https://fatwatarjih.or.id/ketentuan-zakat-ternak-sapi/"
+    },
+    {
+      "title": "Modal dan Keuntungan Apakah Wajib Dizakati?",
+      "url": "https://fatwatarjih.or.id/modal-dan-keuntungan-apakah-dizakati/"
+    },
+    {
+      "title": "Zakat Diberikan ke Pekerjanya Sendiri, Bolehkah?",
+      "url": "https://fatwatarjih.or.id/zakat-diberikan-ke-pekerja-sendiri/"
+    },
+    {
+      "title": "Zakat Harta Benda Tetap",
+      "url": "https://fatwatarjih.or.id/zakat-harta-benda-tetap/"
+    },
+    {
+      "title": "Zakat Harta Warisan yang telah Dizakati",
+      "url": "https://fatwatarjih.or.id/zakat-harta-warisan-yang-telah-dizakati/"
+    },
+    {
+      "title": "Zakat Fitrah Untuk Fakir Miskin",
+      "url": "https://fatwatarjih.or.id/zakat-fitrah-untuk-fakir-miskin/"
+    },
+    {
+      "title": "Zakat Fitrah Bagi Yang Belum Dewasa",
+      "url": "https://fatwatarjih.or.id/zakat-fitrah-bagi-yang-belum-dewasa/"
+    },
+    {
+      "title": "Zakat Uang Koperasi",
+      "url": "https://fatwatarjih.or.id/zakat-uang-koperasi/"
+    },
+    {
+      "title": "Adakah Zakat Bagi Pegawai?",
+      "url": "https://fatwatarjih.or.id/adakah-zakat-bagi-pegawai/"
+    },
+    {
+      "title": "Zakat Hasil Tanaman Selain Padi",
+      "url": "https://fatwatarjih.or.id/zakat-hasil-tanaman-selain-padi/"
+    },
+    {
+      "title": "Zakat Berlian",
+      "url": "https://fatwatarjih.or.id/zakat-berlian/"
+    },
+    {
+      "title": "Puasa Hari Senin Kamis dan Keutamaannya",
+      "url": "https://fatwatarjih.or.id/puasa-hari-senin-kamis-dan-keutamaannya/"
+    },
+    {
+      "title": "Doa Buka Puasa",
+      "url": "https://fatwatarjih.or.id/doa-buka-puasa/"
+    },
+    {
+      "title": "Menggantikan Puasa Orang Mati",
+      "url": "https://fatwatarjih.or.id/menggantikan-puasa-orang-mati/"
+    },
+    {
+      "title": "Puasa Setiap Hari Kecuali Sehari atau Dua Hari dalam Satu Minggu",
+      "url": "https://fatwatarjih.or.id/puasa-setiap-hari-dalam-satu-minggu/"
+    },
+    {
+      "title": "Wanita Nifas dan Menyusui Wajib Fidyah atau Juga Qadha Puasa?",
+      "url": "https://fatwatarjih.or.id/wanita-nifas-menyusui-fidyah-atau-qadha-puasa/"
+    },
+    {
+      "title": "Cara Pembayaran Fidyah",
+      "url": "https://fatwatarjih.or.id/cara-pembayaran-fidyah/"
+    },
+    {
+      "title": "Macam Macam Puasa Wajib dan Puasa Sunah",
+      "url": "https://fatwatarjih.or.id/macam-puasa-wajib-dan-sunah/"
+    },
+    {
+      "title": "Doa Buka Puasa, Kapan Waktu Membacanya?",
+      "url": "https://fatwatarjih.or.id/kapan-waktu-membaca-doa-buka-puasa/"
+    },
+    {
+      "title": "Mandi Wajib Bagi Orang yang Berpuasa",
+      "url": "https://fatwatarjih.or.id/mandi-wajib-bagi-orang-berpuasa/"
+    },
+    {
+      "title": "Keluar Mani Waktu Puasa karena Mimpi",
+      "url": "https://fatwatarjih.or.id/keluar-mani-saat-puasa-karena-mimpi/"
+    },
+    {
+      "title": "Puasa Bagi Perempuan Haid",
+      "url": "https://fatwatarjih.or.id/puasa-bagi-perempuan-haid/"
+    },
+    {
+      "title": "Junub, Jima’, Berciuman Saat Berpuasa",
+      "url": "https://fatwatarjih.or.id/junub-jimak-berciuman-saat-puasa/"
+    },
+    {
+      "title": "Larangan Makan Sebelum Fajar (Imsak)",
+      "url": "https://fatwatarjih.or.id/larangan-makan-sebelum-fajar-imsak/"
+    },
+    {
+      "title": "Membayar Utang Puasa Haruskah Berturut-turut?",
+      "url": "https://fatwatarjih.or.id/membayar-utang-puasa-haruskah-berturut-turut/"
+    },
+    {
+      "title": "Penjelasan Bentuk Kafarat",
+      "url": "https://fatwatarjih.or.id/penjelasan-bentuk-kafarat/"
+    },
+    {
+      "title": "Fidyah untuk Orang Miskin",
+      "url": "https://fatwatarjih.or.id/fidyah-untuk-orang-miskin/"
+    },
+    {
+      "title": "Makanan Mentah atau Masak untuk Fidyah?",
+      "url": "https://fatwatarjih.or.id/makanan-mentah-atau-masak-untuk-fidyah/"
+    },
+    {
+      "title": "Puasa Wishal, Apakah Dilarang?",
+      "url": "https://fatwatarjih.or.id/puasa-wishal-apakah-dilarang/"
+    },
+    {
+      "title": "Puasa untuk Orang yang telah Meninggal",
+      "url": "https://fatwatarjih.or.id/puasa-untuk-orang-sudah-meninggal/"
+    },
+    {
+      "title": "Puasa untuk Penderita Diabetes",
+      "url": "https://fatwatarjih.or.id/puasa-untuk-penderita-diabetes/"
+    },
+    {
+      "title": "Konsumsi Pil di Saat Puasa",
+      "url": "https://fatwatarjih.or.id/konsumsi-pil-saat-puasa/"
+    },
+    {
+      "title": "Hutang Puasa Dibayar Bersamaan Puasa Sunnah",
+      "url": "https://fatwatarjih.or.id/hutang-puasa-dibayar-bersamaan-puasa-sunnah/"
+    },
+    {
+      "title": "Ketemu Isteri Sedang Puasa Setelah Lama Berpisah",
+      "url": "https://fatwatarjih.or.id/ketemu-isteri-sedang-puasa-setelah-lama-berpisah/"
+    },
+    {
+      "title": "Rangkaian Puasa Senin dan Kamis",
+      "url": "https://fatwatarjih.or.id/rangkaian-puasa-senin-kamis/"
+    },
+    {
+      "title": "Hutang Puasa Bertahun-tahun, Bagaimana Cara Membayarnya?",
+      "url": "https://fatwatarjih.or.id/membayar-hutang-puasa-bertahun-tahun/"
+    },
+    {
+      "title": "Mencium Isteri Ketika Puasa",
+      "url": "https://fatwatarjih.or.id/mencium-isteri-ketika-puasa/"
+    },
+    {
+      "title": "Hutang Puasa Diganti Ahli Waris, Bolehkah?",
+      "url": "https://fatwatarjih.or.id/hutang-puasa-diganti-ahli-waris/"
+    },
+    {
+      "title": "Tidak Puasa karena Haid dan Nifas",
+      "url": "https://fatwatarjih.or.id/tidak-puasa-karena-haid-nifas/"
+    },
+    {
+      "title": "Junub Sesudah Waktu Subuh, Bolehkah Berpuasa?",
+      "url": "https://fatwatarjih.or.id/junub-sesudah-subuh-bolehkah-puasa/"
+    },
+    {
+      "title": "Niat Puasa Sesudah Imsak",
+      "url": "https://fatwatarjih.or.id/niat-puasa-sesudah-imsak/"
+    },
+    {
+      "title": "Hukum Bacaan Basmalah di Awal Al-Fatihah dalam Shalat",
+      "url": "https://fatwatarjih.or.id/hukum-bacaan-basmalah-di-awal-al-fatihah-dalam-shalat/"
+    },
+    {
+      "title": "Penjelasan Tentang Mihrab Masjid",
+      "url": "https://fatwatarjih.or.id/penjelasan-tentang-mihrab-masjid/"
+    },
+    {
+      "title": "Fungsi Sutrah dalam Shalat",
+      "url": "https://fatwatarjih.or.id/fungsi-sutrah-dalam-shalat/"
+    },
+    {
+      "title": "Memanfaatkan Harta Zakat untuk Modal Usaha, Bolehkah?",
+      "url": "https://fatwatarjih.or.id/memanfaatkan-harta-zakat-untuk-modal-usaha-bolehkah/"
+    },
+    {
+      "title": "Pembelian Mobil, Motor dan Rumah Apakah Wajib Dizakati?",
+      "url": "https://fatwatarjih.or.id/pembelian-mobil-motor-rumah-apakah-wajib-dizakati/"
+    },
+    {
+      "title": "Ibadah Kurban di Masa Wabah Penyakit Mulut dan Kuku (PMK)",
+      "url": "https://fatwatarjih.or.id/fatwa-ibadah-kurban-wabah-pmk/"
+    },
+    {
+      "title": "Adakah Tuntunan Puasa Bulan Rajab?",
+      "url": "https://fatwatarjih.or.id/adakah-tuntunan-puasa-rajab/"
+    },
+    {
+      "title": "Bolehkah Aqiqah Setelah Dewasa?",
+      "url": "https://fatwatarjih.or.id/bolehkah-aqiqah-setelah-dewasa/"
+    },
+    {
+      "title": "Shalat Jumat Online, Bagaimana Hukumnya?",
+      "url": "https://fatwatarjih.or.id/hukum-shalat-jumat-online/"
+    },
+    {
+      "title": "Hukum Shalat Berjamaah Bagi Seorang Muslim",
+      "url": "https://fatwatarjih.or.id/hukum-shalat-berjamaah-bagi-seorang-muslim/"
+    },
+    {
+      "title": "Waktu-waktu Dilarang Shalat",
+      "url": "https://fatwatarjih.or.id/waktu-waktu-dilarang-shalat/"
+    },
+    {
+      "title": "Hukum Makmum Masbuk Membuat Jamaah Baru",
+      "url": "https://fatwatarjih.or.id/makmum-masbuk-membuat-jamaah-baru/"
+    },
+    {
+      "title": "Beda Cara Shalat Subuh dan Shalat Jumat Antara Dua Kelompok",
+      "url": "https://fatwatarjih.or.id/beda-cara-shalat-subuh-dan-shalat-jumat/"
+    },
+    {
+      "title": "Shalat Hifzhi, Adakah Tuntunannya?",
+      "url": "https://fatwatarjih.or.id/shalat-hifzhi-adakah-tuntunannya/"
+    },
+    {
+      "title": "Adakah Shalat Sunnah Qabliyah Jumat?",
+      "url": "https://fatwatarjih.or.id/adakah-shalat-sunnah-qabliyah-jumat/"
+    },
+    {
+      "title": "Salat Sunah Malam Hari Selain Tahajud",
+      "url": "https://fatwatarjih.or.id/salat-sunah-malam-hari-selain-tahajud/"
+    },
+    {
+      "title": "Shalat Dhuha Tiap Hari",
+      "url": "https://fatwatarjih.or.id/shalat-dhuha-tiap-hari/"
+    },
+    {
+      "title": "Bolehkah Membayarkan Fidyah ke Daerah Lain?",
+      "url": "https://fatwatarjih.or.id/bolehkah-membayarkan-fidyah-ke-daerah-lain/"
+    },
+    {
+      "title": "Hukum Shalat di Masjid yang Belum Ber-IMB",
+      "url": "https://fatwatarjih.or.id/hukum-shalat-di-masjid-yang-belum-ber-imb/"
+    },
+    {
+      "title": "Shalat Berjamaah Pada Masjid Bertingkat",
+      "url": "https://fatwatarjih.or.id/shalat-berjamaah-pada-masjid-bertingkat/"
+    },
+    {
+      "title": "Shalat Jenazah Harus 3 Shaf, Adakah Dalilnya?",
+      "url": "https://fatwatarjih.or.id/shalat-jenazah-harus-3-shaf-adakah-dalilnya/"
+    },
+    {
+      "title": "Membaca Al-Qur’an Dengan Pengeras Suara",
+      "url": "https://fatwatarjih.or.id/membaca-al-quran-dengan-pengeras-suara/"
+    },
+    {
+      "title": "Shalat Jumat Azan 1 Kali dan Jamaah Kurang dari 40 Orang",
+      "url": "https://fatwatarjih.or.id/shalat-jumat-azan-satu-kali-jamaah-kurang-dari-40/"
+    },
+    {
+      "title": "Penggunaan Dana Infak Masjid Berbeda Dengan yang Diniatkan Jamaah",
+      "url": "https://fatwatarjih.or.id/dana-infak-masjid-tidak-sesuai-niat-jamaah/"
+    },
+    {
+      "title": "Puasa Arafah, Haruskah Bertepatan Dengan Wukuf?",
+      "url": "https://fatwatarjih.or.id/puasa-arafah-haruskah-bertepatan-dengan-wukuf/"
+    },
+    {
+      "title": "Bolehkah Mendengarkan Khutbah Jumat Sambil Membelakangi Mimbar?",
+      "url": "https://fatwatarjih.or.id/mendengarkan-khutbah-jumat-membelakangi-mimbar/"
+    },
+    {
+      "title": "Bacaan Doa Iftitah dan Al-Fatihah Bagi Makmum Masbuk",
+      "url": "https://fatwatarjih.or.id/doa-iftitah-dan-al-fatihah-bagi-makmum-masbuk/"
+    },
+    {
+      "title": "Benarkah Shalat Dhuha untuk Minta Rezeki Secara Khusus?",
+      "url": "https://fatwatarjih.or.id/shalat-dhuha-untuk-minta-rezeki/"
+    },
+    {
+      "title": "Shalat Sambil Membuka Mushaf, Bolehkah?",
+      "url": "https://fatwatarjih.or.id/shalat-sambil-membuka-mushaf-bolehkah/"
+    },
+    {
+      "title": "Setelah Shalat Witir, Bolehkah Shalat Sunnah Lagi?",
+      "url": "https://fatwatarjih.or.id/setelah-shalat-witir-bolehkah-shalat-sunnah-lagi/"
+    },
+    {
+      "title": "Menikah Dalam Kondisi Hamil, Perlukah Mengulang Akad?",
+      "url": "https://fatwatarjih.or.id/menikah-dalam-kondisi-hamil-perlukah-mengulang-akad/"
+    },
+    {
+      "title": "Shalat Jamak Qashar Bagi Musafir",
+      "url": "https://fatwatarjih.or.id/shalat-jamak-qashar-bagi-musafir/"
+    },
+    {
+      "title": "Cara Membayarkan Hutang Puasa Orangtua",
+      "url": "https://fatwatarjih.or.id/cara-membayarkan-hutang-puasa-orangtua/"
+    },
+    {
+      "title": "Sedekap Ketika Bangun dari Ruku’ dan Duduk Iftirasy pada Shalat 2 Rakaat",
+      "url": "https://fatwatarjih.or.id/sedekap-bangun-ruku-duduk-iftirasy-shalat-2-rakaat/"
+    },
+    {
+      "title": "Makmum Tidak Mengikuti Cara Duduk Tasyahud Imam",
+      "url": "https://fatwatarjih.or.id/makmum-tidak-mengikuti-cara-duduk-tasyahud-imam/"
+    },
+    {
+      "title": "Hukum Shalat Berjamaah",
+      "url": "https://fatwatarjih.or.id/hukum-shalat-berjamaah/"
+    },
+    {
+      "title": "Klarifikasi Fatwa Tentang Zakat Tanaman",
+      "url": "https://fatwatarjih.or.id/klarifikasi-fatwa-tentang-zakat-tanaman/"
+    },
+    {
+      "title": "Seputar Haid (Masa Suci dan Jenis Darah)",
+      "url": "https://fatwatarjih.or.id/seputar-haid-masa-suci-dan-jenis-darah/"
+    },
+    {
+      "title": "Mengulang Akad Nikah",
+      "url": "https://fatwatarjih.or.id/mengulang-akad-nikah/"
+    },
+    {
+      "title": "Menikah Lagi Setelah Mencerai Empat Istri",
+      "url": "https://fatwatarjih.or.id/menikah-lagi-setelah-mencerai-empat-istri/"
+    },
+    {
+      "title": "Zakat Pertanian Pompanisasi",
+      "url": "https://fatwatarjih.or.id/zakat-pertanian-pompanisasi/"
+    },
+    {
+      "title": "Dana Zakat untuk Persyarikatan, Bolehkah?",
+      "url": "https://fatwatarjih.or.id/dana-zakat-untuk-persyarikatan-bolehkah/"
+    },
+    {
+      "title": "Mengulang Shalat dari Awal Setelah Melakukan Sujud Sahwi",
+      "url": "https://fatwatarjih.or.id/mengulang-shalat-dari-awal-setelah-melakukan-sujud-sahwi/"
+    },
+    {
+      "title": "Kewajiban Zakat Profesi Setelah Dipotong Pajak",
+      "url": "https://fatwatarjih.or.id/kewajiban-zakat-profesi-setelah-dipotong-pajak/"
+    },
+    {
+      "title": "Mengalihfungsikan Masjid, Apakah Memutuskan Pahala Pemberi Wakaf?",
+      "url": "https://fatwatarjih.or.id/mengalihfungsikan-masjid-apakah-memutuskan-pahala-pemberi-wakaf/"
+    },
+    {
+      "title": "Shalat Tarawih Berjamaah Dengan Suara Keras (Jahr)",
+      "url": "https://fatwatarjih.or.id/shalat-tarawih-berjamaah-dengan-suara-keras-jahr/"
+    },
+    {
+      "title": "Batasan Mengusap Tangan Saat Tayammum",
+      "url": "https://fatwatarjih.or.id/batasan-mengusap-tangan-saat-tayammum/"
+    },
+    {
+      "title": "Haruskah Khatib Jumat Sekaligus Imam Shalat Jumat?",
+      "url": "https://fatwatarjih.or.id/haruskah-khatib-jumat-sekaligus-imam-shalat-jumat/"
+    },
+    {
+      "title": "Doa Iftitah Menurut Putusan Tarjih",
+      "url": "https://fatwatarjih.or.id/doa-iftitah-menurut-putusan-tarjih/"
+    },
+    {
+      "title": "Shalat Iftitah, Berjamaah atau Sendiri-sendiri?",
+      "url": "https://fatwatarjih.or.id/shalat-iftitah-berjamaah-atau-sendiri-sendiri/"
+    },
+    {
+      "title": "Dalil Tentang Shalat Iftitah",
+      "url": "https://fatwatarjih.or.id/dalil-tentang-shalat-iftitah/"
+    },
+    {
+      "title": "Ketentuan Zakat Profesi dan Gaji Pensiun",
+      "url": "https://fatwatarjih.or.id/ketentuan-zakat-profesi-dan-gaji-pensiun/"
+    },
+    {
+      "title": "Shalat Jumat Bagi Perempuan",
+      "url": "https://fatwatarjih.or.id/shalat-jumat-bagi-perempuan/"
+    },
+    {
+      "title": "Adakah Shalat Sunnah Qabliyah Isya’?",
+      "url": "https://fatwatarjih.or.id/adakah-shalat-sunnah-qabliyah-isya/"
+    },
+    {
+      "title": "Tata Cara Pelaksanaan Shalat Gerhana",
+      "url": "https://fatwatarjih.or.id/tata-cara-pelaksanaan-shalat-gerhana/"
+    },
+    {
+      "title": "Mengapa Muhammadiyah Tidak Mengamalkan Qunut?",
+      "url": "https://fatwatarjih.or.id/mengapa-muhammadiyah-tidak-mengamalkan-qunut/"
+    },
+    {
+      "title": "Bolehkah Menukar Kulit Sapi Kurban dengan Seekor Kambing?",
+      "url": "https://fatwatarjih.or.id/bolehkah-menukar-kulit-sapi-kurban-dengan-seekor-kambing/"
+    },
+    {
+      "title": "Shalat Fidyah, Adakah Dasar Hukumnya?",
+      "url": "https://fatwatarjih.or.id/shalat-fidyah-adakah-dasar-hukumnya/"
+    },
+    {
+      "title": "Cara Duduk Tasyahud Pada Shalat Dua Rakaat",
+      "url": "https://fatwatarjih.or.id/cara-duduk-tasyahud-pada-shalat-dua-rakaat/"
+    },
+    {
+      "title": "Cara Duduk Bagi Makmum Masbuq",
+      "url": "https://fatwatarjih.or.id/cara-duduk-bagi-makmum-masbuq/"
+    },
+    {
+      "title": "Cara Berdiri Setelah Rakaat Pertama",
+      "url": "https://fatwatarjih.or.id/cara-berdiri-setelah-rakaat-pertama/"
+    },
+    {
+      "title": "Waktu Paling Afdhal Melaksanakan Shalat Tarawih",
+      "url": "https://fatwatarjih.or.id/waktu-paling-afdhal-melaksanakan-shalat-tarawih/"
+    },
+    {
+      "title": "Penjelasan Shalat Tarawih 23 Rakaat",
+      "url": "https://fatwatarjih.or.id/penjelasan-shalat-tarawih-23-rakaat/"
+    },
+    {
+      "title": "Hukum Shalat Arbain",
+      "url": "https://fatwatarjih.or.id/hukum-shalat-arbain/"
+    },
+    {
+      "title": "Pengertian Anak Yatim dan Cara Menyantuninya",
+      "url": "https://fatwatarjih.or.id/pengertian-anak-yatim-dan-cara-menyantuninya/"
+    },
+    {
+      "title": "Berkurban 1 Kerbau untuk Lebih dari 7 Orang",
+      "url": "https://fatwatarjih.or.id/berkurban-1-kerbau-untuk-lebih-dari-7-orang/"
+    },
+    {
+      "title": "Cara Duduk Tahiyat Akhir Pada Shalat Dua Rakaat",
+      "url": "https://fatwatarjih.or.id/cara-duduk-tahiyat-akhir-pada-shalat-dua-rakaat/"
+    },
+    {
+      "title": "Hukum Pemakaian Sajadah di Masjid",
+      "url": "https://fatwatarjih.or.id/hukum-pemakaian-sajadah-di-masjid/"
+    },
+    {
+      "title": "Dalil Tentang Tidak Boleh Shalat Witir 2 Kali Dalam Satu Malam",
+      "url": "https://fatwatarjih.or.id/dalil-tentang-tidak-boleh-shalat-witir-2-kali-dalam-satu-malam/"
+    },
+    {
+      "title": "Membayar Hutang Puasa Dalam Kondisi Hamil",
+      "url": "https://fatwatarjih.or.id/hutang-puasa-hamil-diganti-fidyah/"
+    },
+    {
+      "title": "Bacaan Shalawat dalam Khutbah Jumat",
+      "url": "https://fatwatarjih.or.id/bacaan-shalawat-dalam-khutbah-jumat/"
+    },
+    {
+      "title": "Kotoran Cicak di Atas Karpet Masjid, Sahkah Shalat di Atasnya?",
+      "url": "https://fatwatarjih.or.id/kotoran-cicak-di-atas-karpet-masjid-sahkah-shalat-di-atasnya/"
+    },
+    {
+      "title": "Bermakmum pada Imam yang Bacaan Al-Qur’annya Tidak Fasih",
+      "url": "https://fatwatarjih.or.id/bermakmum-pada-imam-yang-bacaan-al-qurannya-tidak-fasih/"
+    },
+    {
+      "title": "Shalat Tahiyatul Masjid Saat Khatib Berkhutbah",
+      "url": "https://fatwatarjih.or.id/shalat-tahiyatul-masjid-saat-khatib-berkhutbah/"
+    },
+    {
+      "title": "Gerhana Bulan Penumbral, Apakah Dianjurkan Shalat Gerhana?",
+      "url": "https://fatwatarjih.or.id/gerhana-bulan-penumbral-apakah-dianjurkan-shalat-gerhana/"
+    },
+    {
+      "title": "Shalat Faitah",
+      "url": "https://fatwatarjih.or.id/shalat-faitah/"
+    },
+    {
+      "title": "Berhari Raya dan Melaksanakan Shalat Id Tidak Pada Hari Ia Berbuka",
+      "url": "https://fatwatarjih.or.id/berhari-raya-dan-melaksanakan-shalat-id-tidak-pada-hari-ia-berbuka/"
+    },
+    {
+      "title": "Bersedekap Sesudah I’tidal (Bangun dari Ruku’)",
+      "url": "https://fatwatarjih.or.id/bersedekap-sesudah-itidal-bangun-dari-ruku/"
+    },
+    {
+      "title": "Mandi Junub Dengan Air Hangat dan Tayammum Pengganti Mandi",
+      "url": "https://fatwatarjih.or.id/mandi-junub-air-hangat-cara-tayammum-mandi/"
+    },
+    {
+      "title": "Beberapa Persoalan Seputar Shalat Jumat",
+      "url": "https://fatwatarjih.or.id/beberapa-persoalan-seputar-shalat-jumat/"
+    },
+    {
+      "title": "Membangun Masjid di Atas Tanah Bekas Kuburan dan Hukum Shalat di Atasnya",
+      "url": "https://fatwatarjih.or.id/membangun-masjid-di-atas-tanah-bekas-kuburan-dan-hukum-shalat-di-atasnya/"
+    },
+    {
+      "title": "Menshalatkan Jenazah Seorang Idiot",
+      "url": "https://fatwatarjih.or.id/menshalatkan-jenazah-seorang-idiot/"
+    },
+    {
+      "title": "Hukum Shalat Jumat Tidak di Masjid",
+      "url": "https://fatwatarjih.or.id/hukum-shalat-jumat-tidak-di-masjid/"
+    },
+    {
+      "title": "Tentang Shalat Jumat",
+      "url": "https://fatwatarjih.or.id/tentang-shalat-jumat/"
+    },
+    {
+      "title": "Haruskah Imam Merangkap Khatib Pada Shalat Jumat?",
+      "url": "https://fatwatarjih.or.id/haruskah-imam-merangkap-khatib-pada-shalat-jumat/"
+    },
+    {
+      "title": "Pahala Shalat di Masjidil Haram",
+      "url": "https://fatwatarjih.or.id/pahala-shalat-di-masjidil-haram/"
+    },
+    {
+      "title": "Hutang Puasa Lewat 2 Kali Ramadhan, Bagaimana Menggantinya?",
+      "url": "https://fatwatarjih.or.id/ketentuan-qadla-mengganti-puasa-ramadhan-yang-ditinggalkan/"
+    },
+    {
+      "title": "Bersuci dari Jilatan Anjing, Bolehkah Mengganti Tanah dengan Sabun?",
+      "url": "https://fatwatarjih.or.id/bersuci-dari-jilatan-anjing-bolehkah-mengganti-tanah-dengan-sabun/"
+    },
+    {
+      "title": "Fidyah dengan Uang dan Dibayarkan Sekaligus",
+      "url": "https://fatwatarjih.or.id/fidyah-dengan-uang-dan-dibayarkan-sekaligus/"
+    },
+    {
+      "title": "Dalil Shalat Tarawih 4 Rakaat Salam",
+      "url": "https://fatwatarjih.or.id/dalil-shalat-tarawih-4-rakaat-salam/"
+    },
+    {
+      "title": "Membaca Sayyidina pada Waktu Tahiyyat",
+      "url": "https://fatwatarjih.or.id/membaca-sayyidina-pada-waktu-tahiyyat/"
+    },
+    {
+      "title": "Membaca Ayat atau Surat Al-Quran Tidak Sesuai Urutan Dalam Shalat",
+      "url": "https://fatwatarjih.or.id/membaca-ayat-atau-surat-tidak-sesuai-urutan-dalam-shalat/"
+    },
+    {
+      "title": "Haruskah Menikah Dalam Keadaan Suci?",
+      "url": "https://fatwatarjih.or.id/haruskah-menikah-dalam-keadaan-suci/"
+    },
+    {
+      "title": "Lafadz Ijab Qabul Dalam Pernikahan",
+      "url": "https://fatwatarjih.or.id/lafadz-ijab-qabul-dalam-pernikahan/"
+    },
+    {
+      "title": "Cara Duduk Tahiyat Pada Shalat Dua Rakaat",
+      "url": "https://fatwatarjih.or.id/cara-duduk-tahiyat-pada-shalat-dua-rakaat/"
+    },
+    {
+      "title": "Zakat Mal untuk Pembangunan, Bolehkah?",
+      "url": "https://fatwatarjih.or.id/zakat-mal-untuk-pembangunan-bolehkah/"
+    },
+    {
+      "title": "Hukum Wanita Haid Membaca Al-Qur’an",
+      "url": "https://fatwatarjih.or.id/hukum-wanita-haid-membaca-al-quran/"
+    },
+    {
+      "title": "Pengertian Sutur atau Sitrah",
+      "url": "https://fatwatarjih.or.id/pengertian-sutur-atau-sitrah/"
+    },
+    {
+      "title": "Shalat Taubat, Adakah Dasar Hukumnya?",
+      "url": "https://fatwatarjih.or.id/shalat-taubat-adakah-dasar-hukumnya/"
+    },
+    {
+      "title": "Sujud Syukur dan Sujud Tilawah, Kaifiyah dan Dasar Hukumnya",
+      "url": "https://fatwatarjih.or.id/sujud-syukur-dan-sujud-tilawah-kaifiyah-dan-dasar-hukumnya/"
+    },
+    {
+      "title": "Shalat Sunnah Ba’diyah Jumat, Shalat Sunnah Fajar dan Shalat Sunnah Iftitah",
+      "url": "https://fatwatarjih.or.id/shalat-sunnah-badiyah-jumat-sunnah-fajar-dan-iftitah/"
+    },
+    {
+      "title": "Shalat di Masjid Dengan Kuburan Dibelakangnya",
+      "url": "https://fatwatarjih.or.id/shalat-di-masjid-dengan-kuburan-dibelakangnya/"
+    },
+    {
+      "title": "Hewan Kurban, Pembagian Daging dan Penjualan Kulitnya",
+      "url": "https://fatwatarjih.or.id/hewan-kurban-pembagian-daging-dan-penjualan-kulitnya/"
+    },
+    {
+      "title": "Bilangan Bacaan Tasbih dalam Rukuk dan Sujud",
+      "url": "https://fatwatarjih.or.id/bilangan-bacaan-tasbih-dalam-rukuk-dan-sujud/"
+    },
+    {
+      "title": "Adab Membaca Surat Al-Qur’an di Dalam Shalat",
+      "url": "https://fatwatarjih.or.id/adab-membaca-surat-al-quran-di-dalam-shalat/"
+    },
+    {
+      "title": "Tuntunan I’tikaf Sesuai Al-Qur’an dan As-Sunnah",
+      "url": "https://fatwatarjih.or.id/tuntunan-itikaf-sesuai-al-quran-dan-as-sunnah/"
+    },
+    {
+      "title": "Posisi Jari Telunjuk Saat Duduk Tahiyat",
+      "url": "https://fatwatarjih.or.id/posisi-jari-telunjuk-saat-duduk-tahiyat/"
+    },
+    {
+      "title": "Waktu Pelaksanaan Shalat Witir",
+      "url": "https://fatwatarjih.or.id/waktu-pelaksanaan-shalat-witir/"
+    },
+    {
+      "title": "Merasa Keluar Cairan dari Kemaluan Saat Shalat",
+      "url": "https://fatwatarjih.or.id/merasa-keluar-cairan-dari-kemaluan-saat-shalat/"
+    },
+    {
+      "title": "Dana Zakat, Infak dan Shadaqah untuk Korban Bencana",
+      "url": "https://fatwatarjih.or.id/dana-zakat-infak-dan-shadaqah-untuk-korban-bencana/"
+    },
+    {
+      "title": "Tata Cara Shalat Bagi Orang yang Sakit",
+      "url": "https://fatwatarjih.or.id/tata-cara-shalat-bagi-orang-sakit/"
+    },
+    {
+      "title": "Tata Cara Shalat Tahajjud dan Shalat Dhuha",
+      "url": "https://fatwatarjih.or.id/tata-cara-shalat-tahajud-dan-shalat-dhuha/"
+    },
+    {
+      "title": "Bolehkah Suami Menggantikan Puasa Qadha Istrinya?",
+      "url": "https://fatwatarjih.or.id/bolehkah-suami-menggantikan-puasa-qadha-istrinya/"
+    },
+    {
+      "title": "Shalat Iftitah dan Ketentuan Pelaksanaannya",
+      "url": "https://fatwatarjih.or.id/shalat-iftitah-dan-ketentuan-pelaksanaannya/"
+    },
+    {
+      "title": "Hukum Onani pada Saat Puasa",
+      "url": "https://fatwatarjih.or.id/onani-pada-saat-puasa/"
+    },
+    {
+      "title": "Hukum Menerima Zakat dari Anak Kandung",
+      "url": "https://fatwatarjih.or.id/hukum-menerima-zakat-dari-anak-kandung/"
+    },
+    {
+      "title": "Gerakan Sujud yang Benar Sesuai tuntunan Rasulullah saw",
+      "url": "https://fatwatarjih.or.id/gerakan-sujud-yang-benar-sesuai-tuntunan-rasulullah/"
+    },
+    {
+      "title": "Berjabat Tangan Setelah Shalat Berjamaah",
+      "url": "https://fatwatarjih.or.id/berjabat-tangan-setelah-shalat-berjamaah/"
+    },
+    {
+      "title": "Dalil Shalat Tarawih Dan Witir 4, 4 dan 3 Raka’at Serta 2, 2, 2, 2 dan 3 Raka’at",
+      "url": "https://fatwatarjih.or.id/dalil-shalat-tarawih-sebelas-rakaat/"
+    },
+    {
+      "title": "Pahala dan Keutamaan Puasa Senin Kamis",
+      "url": "https://fatwatarjih.or.id/pahala-dan-keutamaan-puasa-senin-kamis/"
+    },
+    {
+      "title": "Shalat Sunnah di Hari Jumat",
+      "url": "https://fatwatarjih.or.id/shalat-sunnah-di-hari-jumat/"
+    },
+    {
+      "title": "Lafadz Niat Shalat",
+      "url": "https://fatwatarjih.or.id/lafadz-niat-shalat/"
+    },
+    {
+      "title": "Penjelasan Zakat Profesi dan Zakat Pertanian",
+      "url": "https://fatwatarjih.or.id/perhitungan-zakat-profesi-dan-zakat-pertanian/"
+    },
+    {
+      "title": "Yang Dimaksud Dengan Melalaikan Shalat",
+      "url": "https://fatwatarjih.or.id/maksud-melalaikan-shalat/"
+    },
+    {
+      "title": "Bersentuhan Kulit Laki-laki dan Perempuan Membatalkan Wudhu?",
+      "url": "https://fatwatarjih.or.id/batal-wudhu-bersentuhan-kulit-laki-laki-dan-perempuan/"
+    },
+    {
+      "title": "Status Zakat Fitrah yang Dibagikan Setelah Pelaksanaan Shalat Id",
+      "url": "https://fatwatarjih.or.id/zakat-fitrah-dibagikan-setelah-shalat-id/"
+    },
+    {
+      "title": "Zakat dari Uang Kelebihan Hajatan",
+      "url": "https://fatwatarjih.or.id/zakat-dari-uang-kelebihan-hajatan/"
+    },
+    {
+      "title": "Hewan Qurban Tidak Disembelih, Tetapi Dimanfaatkan Dengan Cara Lain",
+      "url": "https://fatwatarjih.or.id/hewan-qurban-tidak-disembelih/"
+    },
+    {
+      "title": "Menambah Kata Sayyidina di Depan Kata Muhammad",
+      "url": "https://fatwatarjih.or.id/menambah-kata-sayyidina-di-depan-muhammad/"
+    },
+    {
+      "title": "Ketentuan Zakat Bagi Pedagang Yang Masih Punya Hutang",
+      "url": "https://fatwatarjih.or.id/zakat-bagi-pedagang-yang-masih-punya-hutang/"
+    },
+    {
+      "title": "Membatalkan Puasa Karena Kerja Berat, Bolehkah?",
+      "url": "https://fatwatarjih.or.id/hukum-membatalkan-puasa-karena-kerja-berat/"
+    }
+  ],
+  "Ilmu Falak": [
+    {
+      "title": "Apa Kelemahan Rukyat?",
+      "url": "https://fatwatarjih.or.id/apa-kelemahan-rukyat/"
+    }
+  ],
+  "Infak": [
+    {
+      "title": "Dana Infak untuk Simpan Pinjam",
+      "url": "https://fatwatarjih.or.id/dana-infak-untuk-simpan-pinjam/"
+    }
+  ],
+  "Jenazah": [
+    {
+      "title": "Melayat Jenazah Non Muslim",
+      "url": "https://fatwatarjih.or.id/hukum-melayat-jenazah-non-muslim/"
+    },
+    {
+      "title": "Persoalan Hutang Orang yang Telah Meninggal Dunia",
+      "url": "https://fatwatarjih.or.id/persoalan-hutang-orang-yang-telah-meninggal-dunia/"
+    },
+    {
+      "title": "Perawatan Jenazah Berupa Janin Usai Keguguran",
+      "url": "https://fatwatarjih.or.id/perawatan-jenazah-berupa-janin-usai-keguguran/"
+    }
+  ],
+  "Jual Beli": [
+    {
+      "title": "Hukum Jual Beli dengan Cara Kredit",
+      "url": "https://fatwatarjih.or.id/hukum-jual-beli-dengan-cara-kredit/"
+    }
+  ],
+  "Jumat": [],
+  "Khitan": [],
+  "Kontemporer": [
+    {
+      "title": "Bolehkah Mendeteksi Jenis Kelamin Bayi Melalui USG?",
+      "url": "https://fatwatarjih.or.id/bolehkah-mendeteksi-jenis-kelamin-bayi-melalui-usg/"
+    },
+    {
+      "title": "Bagaimana Hukum Pasang Gigi?",
+      "url": "https://fatwatarjih.or.id/bagaimana-hukum-pasang-gigi/"
+    },
+    {
+      "title": "Batas-Batas Kesenian yang Diperbolehkan Dalam Islam",
+      "url": "https://fatwatarjih.or.id/batas-batas-kesenian-yang-diperbolehkan-dalam-islam/"
+    },
+    {
+      "title": "Hukum Bayi Tabung dan Kloning Menurut Islam",
+      "url": "https://fatwatarjih.or.id/hukum-bayi-tabung-dan-kloning-menurut-islam/"
+    },
+    {
+      "title": "Ringtone dengan Suara Adzan atau Ayat-ayat Al-Qur’an",
+      "url": "https://fatwatarjih.or.id/ringtone-dengan-suara-adzan-atau-ayat-ayat-al-quran/"
+    }
+  ],
+  "Lain-Lain": [
+    {
+      "title": "Hukum Politik Uang (Money Politics) pada Pemilihan Umum (Pemilu) Serentak 2024",
+      "url": "https://fatwatarjih.or.id/hukum-politik-uang-money-politics-pemilu-serentak/"
+    }
+  ],
+  "Makan dan Minum": [],
+  "Manhaj": [],
+  "Masjid": [],
+  "Muamalah": [
+    {
+      "title": "Prinsip Bergaul dengan Non Muslim",
+      "url": "https://fatwatarjih.or.id/prinsip-bergaul-dengan-non-muslim/"
+    },
+    {
+      "title": "Menyantuni Yatim Non Muslim, Bolehkah?",
+      "url": "https://fatwatarjih.or.id/menyantuni-yatim-non-muslim/"
+    },
+    {
+      "title": "Menerima Bantuan dari Non Muslim",
+      "url": "https://fatwatarjih.or.id/menerima-bantuan-non-muslim/"
+    },
+    {
+      "title": "Batas Toleransi Pergaulan dengan Non Muslim",
+      "url": "https://fatwatarjih.or.id/batas-toleransi-pergaulan-dengan-non-muslim/"
+    },
+    {
+      "title": "Bergaul dengan Non Muslim",
+      "url": "https://fatwatarjih.or.id/bergaul-dengan-non-muslim/"
+    },
+    {
+      "title": "Doa Kepada Orangtua Non Muslim",
+      "url": "https://fatwatarjih.or.id/doa-kepada-orangtua-non-muslim/"
+    },
+    {
+      "title": "Sikap Saat Menerima Tamu Non Muslim",
+      "url": "https://fatwatarjih.or.id/sikap-saat-menerima-tamu-non-muslim/"
+    },
+    {
+      "title": "Menjawab Salam Non Muslim",
+      "url": "https://fatwatarjih.or.id/menjawab-salam-non-muslim/"
+    },
+    {
+      "title": "Hukum Mengikuti Kuis Lewat SMS di Televisi",
+      "url": "https://fatwatarjih.or.id/hukum-mengikuti-kuis-lewat-sms-di-televisi/"
+    },
+    {
+      "title": "Hukum Bekerja Sebagai PNS di Bea Cukai dan Pajak",
+      "url": "https://fatwatarjih.or.id/hukum-pns-bea-cukai-dan-pajak/"
+    },
+    {
+      "title": "Harta Gono Gini dan Pensiunan Suami",
+      "url": "https://fatwatarjih.or.id/harta-gono-gini-dan-pensiunan-suami/"
+    },
+    {
+      "title": "Hukum Gratifikasi atau Suap Dalam Islam",
+      "url": "https://fatwatarjih.or.id/hukum-gratifikasi-atau-suap-dalam-islam/"
+    },
+    {
+      "title": "Pinjam Dana Partai Politik untuk Modal Usaha",
+      "url": "https://fatwatarjih.or.id/pinjam-dana-partai-politik-untuk-modal-usaha/"
+    },
+    {
+      "title": "Hukum Investasi Kontrak pada Usaha Server Pulsa Elektrik",
+      "url": "https://fatwatarjih.or.id/hukum-investasi-kontrak-pada-usaha-server-pulsa-elektrik/"
+    },
+    {
+      "title": "Resep Rahasia, Apakah Termasuk Menyembunyikan Ilmu?",
+      "url": "https://fatwatarjih.or.id/resep-rahasia-apakah-termasuk-menyembunyikan-ilmu/"
+    },
+    {
+      "title": "Hukum Penghasilan Dari Bengkel Rekanan Asuransi",
+      "url": "https://fatwatarjih.or.id/hukum-penghasilan-dari-bengkel-rekanan-asuransi/"
+    },
+    {
+      "title": "Tanah Wakaf yang Terlantar, Bagaimana Solusinya?",
+      "url": "https://fatwatarjih.or.id/tanah-wakaf-yang-terlantar-bagaimana-solusinya/"
+    },
+    {
+      "title": "Pemanfaatan Aset Wakaf untuk Kepentingan Perseorangan",
+      "url": "https://fatwatarjih.or.id/pemanfaatan-aset-wakaf-untuk-kepentingan-perseorangan/"
+    },
+    {
+      "title": "Penentuan Waktu Kematian Seseorang pada Hukuman Mati",
+      "url": "https://fatwatarjih.or.id/penentuan-waktu-kematian-seseorang-pada-hukuman-mati/"
+    },
+    {
+      "title": "Pemanfaatan Tanah Bekas Kuburan",
+      "url": "https://fatwatarjih.or.id/pemanfaatan-tanah-bekas-kuburan/"
+    },
+    {
+      "title": "Uang Pungutan Sekolah untuk Seragam dan THR Guru",
+      "url": "https://fatwatarjih.or.id/uang-pungutan-sekolah-untuk-seragam-dan-thr-guru/"
+    },
+    {
+      "title": "Permainan Olahraga Dengan Tujuan Mencari Dana",
+      "url": "https://fatwatarjih.or.id/permainan-olahraga-dengan-tujuan-mencari-dana/"
+    },
+    {
+      "title": "Hukum Pertunangan Menurut Islam",
+      "url": "https://fatwatarjih.or.id/hukum-pertunangan-menurut-islam/"
+    },
+    {
+      "title": "Perkemahan Putri Kepanduan Hizbul Wathan",
+      "url": "https://fatwatarjih.or.id/perkemahan-putri-kepanduan-hizbul-wathan/"
+    },
+    {
+      "title": "Umur Bulan Hijriyah",
+      "url": "https://fatwatarjih.or.id/umur-bulan-hijriyah/"
+    },
+    {
+      "title": "Hukum Bermain Catur",
+      "url": "https://fatwatarjih.or.id/hukum-bermain-catur/"
+    }
+  ],
+  "Muhammadiyah": [],
+  "Pendidikan": [],
+  "Pernikahan": [
+    {
+      "title": "Hukum Perkawinan Antara Saudara Sepupu",
+      "url": "https://fatwatarjih.or.id/hukum-perkawinan-antara-saudara-sepupu/"
+    }
+  ],
+  "Puasa": [
+    {
+      "title": "Waktu Imsak adalah Bid’ah, Benarkah?",
+      "url": "https://fatwatarjih.or.id/benarkah-imsak-bidah/"
+    },
+    {
+      "title": "Wanita Menyusui yang Tidak Berpuasa, Wajib Qadha’ atau Fidyah?",
+      "url": "https://fatwatarjih.or.id/wanita-menyusui-tidak-berpuasa-qadha-atau-fidyah/"
+    }
+  ],
+  "Qurban": [],
+  "Ramadhan": [
+    {
+      "title": "Membuka Rumah Makan di Siang Ramadhan",
+      "url": "https://fatwatarjih.or.id/membuka-rumah-makan-di-siang-ramadhan/"
+    },
+    {
+      "title": "Pengeras Suara Untuk Syiar",
+      "url": "https://fatwatarjih.or.id/pengeras-suara-untuk-syiar/"
+    },
+    {
+      "title": "Pemberi Kultum Tarawih Tidak Mengikuti Shalat Tarawih",
+      "url": "https://fatwatarjih.or.id/pemberi-kultum-tarawih-tidak-mengikuti-shalat-tarawih/"
+    }
+  ],
+  "Rumah Tangga": [],
+  "Sedekah": [],
+  "Shalat": [],
+  "Status Hadis": [
+    {
+      "title": "Kedudukan Hadis Sahih Mutawatir",
+      "url": "https://fatwatarjih.or.id/kedudukan-hadis-sahih-mutawatir/"
+    }
+  ],
+  "Thaharah": [
+    {
+      "title": "Thaharah Seputar Air dan Najis",
+      "url": "https://fatwatarjih.or.id/thaharah-seputar-air-dan-najis/"
+    }
+  ],
+  "Tradisi": [],
+  "Wakaf": [],
+  "Wanita": [],
+  "Wudhu": [],
+  "Zakat": [],
+  "ZIS": []
+};
+</script>
+    <script>
+        const articlesData = window.articlesData || {};
+        const API_ENDPOINT = 'https://fatwatarjih.or.id/wp-json/wp/v2/posts?slug=';
+        const categoriesDiv = document.getElementById('categories');
+        const statsDiv = document.getElementById('stats');
+        const welcomeScreen = document.getElementById('welcomeScreen');
+        const articleContainer = document.getElementById('articleContainer');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const articleContent = document.getElementById('articleContent');
+        const searchInput = document.getElementById('searchInput');
+        const openNewTab = document.getElementById('openNewTab');
+
+        let currentUrl = '';
+        let totalArticles = 0;
+
+        function renderCategories() {
+            totalArticles = 0;
+            categoriesDiv.innerHTML = '';
+            const fragment = document.createDocumentFragment();
+            
+            Object.keys(articlesData).forEach(category => {
+                const articles = articlesData[category] || [];
+                totalArticles += articles.length;
+                
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category';
+                
+                const headerDiv = document.createElement('div');
+                headerDiv.className = 'category-header';
+                headerDiv.innerHTML = `
+                    ${category} (${articles.length})
+                    <span class="arrow">▶</span>
+                `;
+                
+                const itemsDiv = document.createElement('div');
+                itemsDiv.className = 'category-items';
+                
+                articles.forEach((article) => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'item';
+                    itemDiv.textContent = article.title;
+                    itemDiv.addEventListener('click', (event) => loadArticle(article, event.currentTarget));
+                    itemsDiv.appendChild(itemDiv);
+                });
+                
+                headerDiv.addEventListener('click', () => {
+                    headerDiv.classList.toggle('active');
+                    itemsDiv.classList.toggle('active');
+                });
+                
+                categoryDiv.appendChild(headerDiv);
+                categoryDiv.appendChild(itemsDiv);
+                fragment.appendChild(categoryDiv);
+            });
+            
+            categoriesDiv.appendChild(fragment);
+            statsDiv.innerHTML = `Total: <strong>${totalArticles}</strong> artikel`;
+        }
+
+        function getSlugFromUrl(url = '') {
+            const cleaned = url.replace(/\\/$/, '');
+            const segments = cleaned.split('/').filter(Boolean);
+            return segments.pop() || '';
+        }
+
+        async function fetchArticleData(articleUrl) {
+            const slug = getSlugFromUrl(articleUrl);
+            if (!slug) {
+                throw new Error('Slug artikel tidak valid.');
+            }
+
+            const response = await fetch(`${API_ENDPOINT}${slug}`);
+            if (!response.ok) {
+                throw new Error('Gagal memuat konten dari server.');
+            }
+
+            const data = await response.json();
+            if (!Array.isArray(data) || data.length === 0) {
+                throw new Error('Artikel tidak ditemukan.');
+            }
+
+            return data[0];
+        }
+
+        function sanitizeContent(rawHtml = '') {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(rawHtml, 'text/html');
+            doc.querySelectorAll('script, style, iframe, noscript').forEach(el => el.remove());
+            doc.querySelectorAll('[style]').forEach(el => el.removeAttribute('style'));
+            doc.querySelectorAll('img').forEach(img => {
+                img.removeAttribute('width');
+                img.removeAttribute('height');
+                if (!img.getAttribute('loading')) {
+                    img.setAttribute('loading', 'lazy');
+                }
+            });
+            return doc.body.innerHTML || '';
+        }
+
+        async function loadArticle(article, clickedItem) {
+            document.querySelectorAll('.item').forEach(item => item.classList.remove('active'));
+            if (clickedItem) {
+                clickedItem.classList.add('active');
+            }
+            
+            welcomeScreen.style.display = 'none';
+            articleContainer.style.display = 'block';
+            loadingOverlay.classList.remove('hidden');
+            articleContent.innerHTML = '';
+            currentUrl = article.url;
+
+            try {
+                const post = await fetchArticleData(article.url);
+                const sanitizedContent = sanitizeContent(post.content?.rendered || '');
+                const title = post.title?.rendered || article.title;
+                const safeContent = sanitizedContent || '<p class="article-meta">Konten tidak tersedia.</p>';
+                articleContent.innerHTML = `
+                    <h2 class="article-title">${title}</h2>
+                    ${safeContent}
+                `;
+            } catch (error) {
+                articleContent.innerHTML = `
+                    <div class="error-state">
+                        <h3>❌ Gagal Memuat</h3>
+                        <p>${error.message || 'Artikel tidak dapat dimuat.'}</p>
+                        <button class="retry-button" onclick="window.open('${article.url}', '_blank')">
+                            Buka di Tab Baru
+                        </button>
+                    </div>
+                `;
+            } finally {
+                loadingOverlay.classList.add('hidden');
+            }
+        }
+
+        openNewTab.addEventListener('click', () => {
+            if (currentUrl) {
+                window.open(currentUrl, '_blank');
+            }
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            document.querySelectorAll('.item').forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(searchTerm) ? 'block' : 'none';
+            });
+            
+            document.querySelectorAll('.category').forEach(category => {
+                const items = category.querySelectorAll('.item');
+                const visibleItems = Array.from(items).filter(item => item.style.display !== 'none');
+                
+                if (searchTerm && visibleItems.length === 0) {
+                    category.style.display = 'none';
+                } else {
+                    category.style.display = 'block';
+                    if (searchTerm && visibleItems.length > 0) {
+                        const itemsDiv = category.querySelector('.category-items');
+                        const headerDiv = category.querySelector('.category-header');
+                        itemsDiv.classList.add('active');
+                        headerDiv.classList.add('active');
+                    }
+                }
+            });
+        });
+
+        renderCategories();
+    </script>
+</body>
+</html>
